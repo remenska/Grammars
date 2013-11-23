@@ -1,5 +1,6 @@
 //comment
 grammar mucalculus;
+start : stateFrm;
 
 // TODO: priorities?
 besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
@@ -15,8 +16,7 @@ besVar: ID ;                                                     // BES variable
 
 
 
-besExpr
-  : 'true'                                                       // True
+besExpr: 'true'                                                       // True
   | 'false'                                                      // False
   | besExpr '=>' besExpr                    // Implication
   | besExpr '||' besExpr                    // Disjunction
@@ -44,8 +44,7 @@ pbesInit: 'init' propVarInst ';' ;                               // Initial PBES
 
 dataValExpr: 'val' '(' dataExpr ')';                             // Marked data expression
 
-pbesExpr
-  : dataValExpr                                                  // Data expression
+pbesExpr: dataValExpr                                                  // Data expression
   | 'true'                                                       // True
   | 'false'                                                      // False
   | 'forall' varsDeclList '.' pbesExpr            // Universal quantifier
@@ -60,8 +59,7 @@ pbesExpr
 
 //--- Action formulas
 
-actFrm
-  : multAct                                              // Multi-action
+actFrm: multAct                                              // Multi-action
   | '(' actFrm ')'                                       // Brackets
   | dataValExpr                                          // Boolean data expression
   | 'true'                                                       // True
@@ -77,8 +75,7 @@ actFrm
 
 //--- Regular formulas
 
-regFrm
-  : actFrm                                                // Action formula
+regFrm: actFrm                                                // Action formula
   | '(' regFrm ')'                                        // Brackets
   | 'nil'                                                        // Empty regular formula
   | regFrm '+' regFrm                        // Alternative composition
@@ -89,8 +86,7 @@ regFrm
 
 //--- State formulas
 
-stateFrm
-  : dataValExpr                                           // Data expression
+stateFrm: dataValExpr                                           // Data expression
   | '(' stateFrm ')'                                      // Brackets
   | 'true'                                                       // True
   | 'false'                                                      // False
@@ -121,8 +117,7 @@ varsDeclList: varsDecl ( ',' varsDecl )* ;                       // Individually
 dataExprList: dataExpr ( ',' dataExpr )* ;                       // Data expression list
 
 
-dataExpr
-  : ID                                                           // Identifier
+dataExpr: ID                                                           // Identifier
   | INT                                                       // Number
   | 'true'                                                       // True
   | 'false'                                                      // False
@@ -165,8 +160,7 @@ dataExpr
   | dataExpr 'whr' assignmentList 'end'           // Where clause
   ;
   
-multAct
-  : 'tau'                                                        // Tau, hidden action, empty multi-action
+multAct: 'tau'                                                        // Tau, hidden action, empty multi-action
   | actionList                                                   // Multi-action
   ;
 
@@ -184,16 +178,14 @@ idList: ID ( ',' ID )* ;                                         // List of iden
 
 actionList: action ( '|' action )* ;                             // List of actions
 
-sortExpr
-  : simpleSortExpr
+sortExpr: simpleSortExpr
   | hashArgs '->' sortExpr ;   
   
 assignment: ID '=' dataExpr ;                                    // Assignment
 
 action: ID ( '(' dataExprList ')' )? ;                           // Action, process instantiation
 
-simpleSortExpr
-  : 'Bool'                                                       // Booleans
+simpleSortExpr: 'Bool'                                                       // Booleans
   | 'Pos'                                                        // Positive numbers
   | 'Nat'                                                        // Natural numbers
   | 'Int'                                                        // Integers
@@ -238,8 +230,7 @@ consSpec: 'cons' ( idsDecl ';' )+ ;                              // Declaration 
 
 mapSpec: 'map' ( idsDecl ';' )+ ;                                // Declaration of mappings
 
-sortDecl
-  : idList ';'                                                   // List of sort identifiers
+sortDecl: idList ';'                                                   // List of sort identifiers
   | ID '=' sortExpr ';'                                          // Sort alias
   ;
 
