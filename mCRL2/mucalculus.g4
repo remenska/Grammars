@@ -255,9 +255,9 @@ idsDecl: idList ':' sortExpr ;                                   // Typed parame
 
 // id :  'aman';
 //
-ID  :   LETTER (LETTER | [0-9])* ;
+ID  :   LETTER (LETTER | [0-9])* ; 
 fragment
-LETTER : [a-zA-Z] ;
+LETTER : [a-zA-Z_] ;
 
 INT :   [0-9]+ ;
 
