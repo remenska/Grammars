@@ -3,6 +3,7 @@ grammar mucalculus;
 start : stateFrm;
 
 // TODO: priorities?
+// TODO: sum??
 besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
 
 besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
