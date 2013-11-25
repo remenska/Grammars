@@ -41,7 +41,7 @@ besVar: ID ;                                                     // BES variable
 
 // pbesInit: 'init' propVarInst ';' ;                               // Initial PBES variable
 
-dataValExpr: 'val' '(' dataExpr ')';                             // Marked data expression
+dataValExpr: 'val' '(' myDataExpr=dataExpr ')';                             // Marked data expression
 
 // pbesExpr: dataValExpr                                                  // Data expression
 //   | 'true'                                                       // True
