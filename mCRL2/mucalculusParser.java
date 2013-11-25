@@ -23,7 +23,7 @@ public class mucalculusParser extends Parser {
 		T__22=45, T__21=46, T__20=47, T__19=48, T__18=49, T__17=50, T__16=51, 
 		T__15=52, T__14=53, T__13=54, T__12=55, T__11=56, T__10=57, T__9=58, T__8=59, 
 		T__7=60, T__6=61, T__5=62, T__4=63, T__3=64, T__2=65, T__1=66, T__0=67, 
-		ID=68, INT=69, WS=70;
+		ID=68, INT=69, WS=70, LINE_COMMENT=71;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'eqn'", "'*'", "'['", "'<'", "'List'", "'false'", "'!='", 
 		"'<='", "'Bool'", "'nil'", "'cons'", "'}'", "'->'", "')'", "'Nat'", "'whr'", 
@@ -33,7 +33,7 @@ public class mucalculusParser extends Parser {
 		"'struct'", "'<|'", "'Set'", "'tau'", "'.'", "'=>'", "'+'", "'glob'", 
 		"'forall'", "';'", "'&&'", "'delay'", "'nu'", "'||'", "'exists'", "'>'", 
 		"'Real'", "'FBag'", "'=='", "'/'", "'>='", "'#'", "'end'", "'mu'", "ID", 
-		"INT", "WS"
+		"INT", "WS", "LINE_COMMENT"
 	};
 	public static final int
 		RULE_start = 0, RULE_fixedPointOperator = 1, RULE_besVar = 2, RULE_dataValExpr = 3, 
@@ -5105,7 +5105,7 @@ public class mucalculusParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3H\u027a\4\2\t\2\4"+
+		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3I\u027a\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+

@@ -263,5 +263,6 @@ LETTER : [a-zA-Z_] ;
 
 INT :   [0-9]+ ;
 
-WS  :   [ \t\n\r]+ -> skip ;
+WS  :  ([ \t\n\r])+ -> skip ;
 
+LINE_COMMENT:   '%' .*? '\r'? '\n' -> skip ;
