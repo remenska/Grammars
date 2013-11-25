@@ -58,6 +58,11 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
       return visitChildren(ctx); 
 
 }
+	@Override public T visitBoxModalityStateFrm(@NotNull mucalculusParser.BoxModalityStateFrmContext ctx) { 
+	  System.out.println("Visited visitBoxModalityStateFrm");
+	  return visitChildren(ctx); 
+
+	  }
 
 	}
 
