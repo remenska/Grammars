@@ -89,6 +89,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStart(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -132,6 +137,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMuOperator(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMuOperator(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NuOperatorContext extends FixedPointOperatorContext {
 		public NuOperatorContext(FixedPointOperatorContext ctx) { copyFrom(ctx); }
@@ -142,6 +152,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNuOperator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNuOperator(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -194,6 +209,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBesVar(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBesVar(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final BesVarContext besVar() throws RecognitionException {
@@ -232,6 +252,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDataValExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDataValExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -289,6 +314,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAtOperatorActionFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAtOperatorActionFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ImplicationContext extends ActFrmContext {
 		public ActFrmContext actFrm(int i) {
@@ -305,6 +335,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitImplication(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitImplication(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExistentialQuantifierActionFrmContext extends ActFrmContext {
@@ -323,6 +358,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitExistentialQuantifierActionFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitExistentialQuantifierActionFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FalseActionFrmContext extends ActFrmContext {
 		public FalseActionFrmContext(ActFrmContext ctx) { copyFrom(ctx); }
@@ -333,6 +373,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFalseActionFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFalseActionFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class UnionOfActionsContext extends ActFrmContext {
@@ -351,6 +396,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitUnionOfActions(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitUnionOfActions(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class DataValueExpressionActionFrmContext extends ActFrmContext {
 		public DataValExprContext dataValExpr() {
@@ -364,6 +414,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDataValueExpressionActionFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDataValueExpressionActionFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IntersectionOfActionsContext extends ActFrmContext {
@@ -382,6 +437,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIntersectionOfActions(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIntersectionOfActions(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BracketsActionFrmContext extends ActFrmContext {
 		public ActFrmContext actFrm() {
@@ -396,6 +456,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBracketsActionFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBracketsActionFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class MultiActionContext extends ActFrmContext {
 		public MultActContext multAct() {
@@ -409,6 +474,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMultiAction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMultiAction(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class UniversalQuantifierActionFrmContext extends ActFrmContext {
@@ -427,6 +497,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitUniversalQuantifierActionFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitUniversalQuantifierActionFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class TrueActionFrmContext extends ActFrmContext {
 		public TrueActionFrmContext(ActFrmContext ctx) { copyFrom(ctx); }
@@ -437,6 +512,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitTrueActionFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitTrueActionFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NegationActionFrmContext extends ActFrmContext {
@@ -451,6 +531,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNegationActionFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNegationActionFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -644,6 +729,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitRegFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitRegFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final RegFrmContext regFrm(int _p) throws RecognitionException {
@@ -782,6 +872,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitImplicationStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitImplicationStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BracketsStateFrmContext extends StateFrmContext {
 		public StateFrmContext stateFrm() {
@@ -795,6 +890,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBracketsStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBracketsStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class PBESVariableStateFrmContext extends StateFrmContext {
@@ -810,6 +910,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitPBESVariableStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitPBESVariableStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ExistentialQuantifierStateFrmContext extends StateFrmContext {
@@ -828,6 +933,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitExistentialQuantifierStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitExistentialQuantifierStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class DataValueExpressionStateFrmContext extends StateFrmContext {
 		public DataValExprContext dataValExpr() {
@@ -841,6 +951,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDataValueExpressionStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDataValueExpressionStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ConjunctionStateFrmContext extends StateFrmContext {
@@ -859,6 +974,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitConjunctionStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitConjunctionStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class YaledOpStateFrmContext extends StateFrmContext {
 		public DataExprContext dataExpr() {
@@ -873,6 +993,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitYaledOpStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitYaledOpStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class TrueStateFrmContext extends StateFrmContext {
 		public TrueStateFrmContext(StateFrmContext ctx) { copyFrom(ctx); }
@@ -883,6 +1008,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitTrueStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitTrueStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DiamondModalityStateFrmContext extends StateFrmContext {
@@ -901,6 +1031,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDiamondModalityStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDiamondModalityStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BoxModalityStateFrmContext extends StateFrmContext {
 		public StateFrmContext stateFrm() {
@@ -918,6 +1053,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBoxModalityStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBoxModalityStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FalseStateFrmContext extends StateFrmContext {
 		public FalseStateFrmContext(StateFrmContext ctx) { copyFrom(ctx); }
@@ -928,6 +1068,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFalseStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFalseStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DelayOpStateFrmContext extends StateFrmContext {
@@ -942,6 +1087,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDelayOpStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDelayOpStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DisjunctionStateFmrContext extends StateFrmContext {
@@ -960,6 +1110,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDisjunctionStateFmr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDisjunctionStateFmr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NuStateFrmContext extends StateFrmContext {
 		public StateVarDeclContext stateVarDecl() {
@@ -976,6 +1131,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNuStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNuStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class UniversalQuantifierStateFrmContext extends StateFrmContext {
@@ -994,6 +1154,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitUniversalQuantifierStateFrm(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitUniversalQuantifierStateFrm(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NegationStateFrmContext extends StateFrmContext {
 		public StateFrmContext stateFrm() {
@@ -1007,6 +1172,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNegationStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNegationStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class MuStateFrmContext extends StateFrmContext {
@@ -1024,6 +1194,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMuStateFrm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMuStateFrm(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1285,6 +1460,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStateVarDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStateVarDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StateVarDeclContext stateVarDecl() throws RecognitionException {
@@ -1338,6 +1518,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStateVarAssignment(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStateVarAssignment(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final StateVarAssignmentContext stateVarAssignment() throws RecognitionException {
@@ -1382,6 +1567,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStateVarAssignmentList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStateVarAssignmentList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1439,6 +1629,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitVarsDeclList(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitVarsDeclList(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VarsDeclListContext varsDeclList() throws RecognitionException {
@@ -1494,6 +1689,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDataExprList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDataExprList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1563,6 +1763,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitUniversalQuantifierDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitUniversalQuantifierDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SetBagComprehensionDataExprContext extends DataExprContext {
 		public DataExprContext dataExpr() {
@@ -1579,6 +1784,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSetBagComprehensionDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSetBagComprehensionDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class AdditionDataExprContext extends DataExprContext {
@@ -1597,6 +1807,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAdditionDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAdditionDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class LambdaDataExprContext extends DataExprContext {
 		public VarsDeclListContext varsDeclList() {
@@ -1613,6 +1828,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitLambdaDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitLambdaDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ListSnocDataExprContext extends DataExprContext {
@@ -1631,6 +1851,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListSnocDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListSnocDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FunctionUpdateDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1648,6 +1873,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFunctionUpdateDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFunctionUpdateDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SetEnumerationDataExprContext extends DataExprContext {
 		public DataExprListContext dataExprList() {
@@ -1662,6 +1892,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSetEnumerationDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSetEnumerationDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ListEnumerationDataExprContext extends DataExprContext {
 		public DataExprListContext dataExprList() {
@@ -1675,6 +1910,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListEnumerationDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListEnumerationDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class MultiplicationDataExprContext extends DataExprContext {
@@ -1693,6 +1933,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMultiplicationDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMultiplicationDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ListConcatenationDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1709,6 +1954,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListConcatenationDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListConcatenationDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class InequalityDataExprContext extends DataExprContext {
@@ -1727,6 +1977,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitInequalityDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitInequalityDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BagEnumerationDataExprContext extends DataExprContext {
 		public BagEnumEltListContext bagEnumEltList() {
@@ -1741,6 +1996,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBagEnumerationDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBagEnumerationDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class EmptyBagDataExprContext extends DataExprContext {
 		public EmptyBagDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
@@ -1751,6 +2011,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEmptyBagDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEmptyBagDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class BracketsDataExprContext extends DataExprContext {
@@ -1765,6 +2030,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBracketsDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBracketsDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ListConsDataExprContext extends DataExprContext {
@@ -1783,6 +2053,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListConsDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListConsDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class IntegerDivDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1799,6 +2074,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIntegerDivDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIntegerDivDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class SmallerDataExprContext extends DataExprContext {
@@ -1817,6 +2097,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSmallerDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSmallerDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class LargerDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1834,6 +2119,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitLargerDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitLargerDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class UnaryMinusDataExprContext extends DataExprContext {
 		public DataExprContext dataExpr() {
@@ -1847,6 +2137,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitUnaryMinusDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitUnaryMinusDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class WhereClauseDataExprContext extends DataExprContext {
@@ -1865,6 +2160,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitWhereClauseDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitWhereClauseDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class LargerEqualDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1881,6 +2181,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitLargerEqualDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitLargerEqualDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IntegerModDataExprContext extends DataExprContext {
@@ -1899,6 +2204,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIntegerModDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIntegerModDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ListSizeDataExprContext extends DataExprContext {
 		public DataExprContext dataExpr() {
@@ -1913,6 +2223,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListSizeDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListSizeDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class EmptySetDataExprContext extends DataExprContext {
 		public EmptySetDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
@@ -1923,6 +2238,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEmptySetDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEmptySetDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class SubtractionDataExprContext extends DataExprContext {
@@ -1941,6 +2261,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSubtractionDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSubtractionDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class TrueDataExprContext extends DataExprContext {
 		public TrueDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
@@ -1951,6 +2276,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitTrueDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitTrueDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class EqualityDataExprContext extends DataExprContext {
@@ -1969,6 +2299,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEqualityDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEqualityDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ImplicationDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -1986,6 +2321,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitImplicationDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitImplicationDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NumberDataExprContext extends DataExprContext {
 		public TerminalNode INT() { return getToken(mucalculusParser.INT, 0); }
@@ -1998,6 +2338,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNumberDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNumberDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class EmptyListDataExprContext extends DataExprContext {
 		public EmptyListDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
@@ -2008,6 +2353,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEmptyListDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEmptyListDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class IdentifierDataExprContext extends DataExprContext {
@@ -2021,6 +2371,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIdentifierDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIdentifierDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FalseDataExprContext extends DataExprContext {
 		public FalseDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
@@ -2031,6 +2386,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFalseDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFalseDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class MemberShipSetBagDataExprContext extends DataExprContext {
@@ -2049,6 +2409,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMemberShipSetBagDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMemberShipSetBagDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ConjunctionDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -2065,6 +2430,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitConjunctionDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitConjunctionDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DisjunctionDataExprContext extends DataExprContext {
@@ -2083,6 +2453,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDisjunctionDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDisjunctionDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExistentialQuantifierDataExprContext extends DataExprContext {
 		public VarsDeclListContext varsDeclList() {
@@ -2099,6 +2474,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitExistentialQuantifierDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitExistentialQuantifierDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DivisionDataExprContext extends DataExprContext {
@@ -2117,6 +2497,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDivisionDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDivisionDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SmallerEqualDataExprContext extends DataExprContext {
 		public List<DataExprContext> dataExpr() {
@@ -2133,6 +2518,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSmallerEqualDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSmallerEqualDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ListElemPositionDataExprContext extends DataExprContext {
@@ -2151,6 +2541,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListElemPositionDataExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListElemPositionDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NegationSetComplementDataExprContext extends DataExprContext {
 		public DataExprContext dataExpr() {
@@ -2164,6 +2559,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNegationSetComplementDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNegationSetComplementDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class FunctionApplicationDataExprContext extends DataExprContext {
@@ -2181,6 +2581,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFunctionApplicationDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFunctionApplicationDataExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2692,6 +3097,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMultAct(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMultAct(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MultActContext multAct() throws RecognitionException {
@@ -2746,6 +3156,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitVarsDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitVarsDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VarsDeclContext varsDecl() throws RecognitionException {
@@ -2788,6 +3203,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBagEnumEltList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBagEnumEltList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2845,6 +3265,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBagEnumElt(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBagEnumElt(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final BagEnumEltContext bagEnumElt() throws RecognitionException {
@@ -2887,6 +3312,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAssignmentList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAssignmentList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -2942,6 +3372,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitVarDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitVarDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VarDeclContext varDecl() throws RecognitionException {
@@ -2982,6 +3417,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIdList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIdList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3038,6 +3478,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitActionList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitActionList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3100,6 +3545,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortExpr(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SortExprContext sortExpr() throws RecognitionException {
@@ -3153,6 +3603,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAssignment(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAssignment(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
@@ -3193,6 +3648,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAction(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3250,6 +3710,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSetSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSetSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BagSortContext extends SimpleSortExprContext {
 		public SortExprContext sortExpr() {
@@ -3264,6 +3729,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBagSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBagSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PositiveNumSortContext extends SimpleSortExprContext {
 		public PositiveNumSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
@@ -3275,6 +3745,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitPositiveNumSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitPositiveNumSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class BooleanSortContext extends SimpleSortExprContext {
 		public BooleanSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
@@ -3285,6 +3760,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBooleanSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBooleanSort(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ListSortContext extends SimpleSortExprContext {
@@ -3300,6 +3780,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitListSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitListSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class FiniteSetSortContext extends SimpleSortExprContext {
 		public SortExprContext sortExpr() {
@@ -3314,6 +3799,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFiniteSetSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFiniteSetSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class IntegerSortContext extends SimpleSortExprContext {
 		public IntegerSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
@@ -3324,6 +3814,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIntegerSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIntegerSort(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class ParenthesisSortContext extends SimpleSortExprContext {
@@ -3339,6 +3834,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitParenthesisSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitParenthesisSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SortReferenceContext extends SimpleSortExprContext {
 		public TerminalNode ID() { return getToken(mucalculusParser.ID, 0); }
@@ -3350,6 +3850,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortReference(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortReference(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class FiniteBagSortContext extends SimpleSortExprContext {
@@ -3365,6 +3870,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFiniteBagSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFiniteBagSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class StructuredSortContext extends SimpleSortExprContext {
 		public ConstrDeclListContext constrDeclList() {
@@ -3379,6 +3889,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStructuredSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStructuredSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class NaturalNumSortContext extends SimpleSortExprContext {
 		public NaturalNumSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
@@ -3390,6 +3905,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNaturalNumSort(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNaturalNumSort(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class RealSortContext extends SimpleSortExprContext {
 		public RealSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
@@ -3400,6 +3920,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitRealSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitRealSort(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3552,6 +4077,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitHashArgs(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitHashArgs(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final HashArgsContext hashArgs() throws RecognitionException {
@@ -3607,6 +4137,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitConstrDeclList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitConstrDeclList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3667,6 +4202,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitConstrDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitConstrDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ConstrDeclContext constrDecl() throws RecognitionException {
@@ -3726,6 +4266,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitProjDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitProjDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProjDeclContext projDecl() throws RecognitionException {
@@ -3775,6 +4320,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitProjDeclList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitProjDeclList(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3849,6 +4399,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitDataSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitDataSpec(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -3927,6 +4482,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitGlobVarSpec(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitGlobVarSpec(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final GlobVarSpecContext globVarSpec() throws RecognitionException {
@@ -3982,6 +4542,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitVarSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitVarSpec(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4041,6 +4606,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEqnSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEqnSpec(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4105,6 +4675,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEqnDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEqnDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final EqnDeclContext eqnDecl() throws RecognitionException {
@@ -4157,6 +4732,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortSpec(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4213,6 +4793,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitConsSpec(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitConsSpec(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ConsSpecContext consSpec() throws RecognitionException {
@@ -4268,6 +4853,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitMapSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitMapSpec(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -4326,6 +4916,11 @@ public class mucalculusParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortDecl(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortDecl(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final SortDeclContext sortDecl() throws RecognitionException {
@@ -4382,6 +4977,11 @@ public class mucalculusParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIdsDecl(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIdsDecl(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

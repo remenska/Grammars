@@ -1043,17 +1043,13 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterTrueStateFrm(@NotNull mucalculusParser.TrueStateFrmContext ctx) {
-	  System.out.println("Entered TRUE \0/ ");
-	}
+	@Override public void enterTrueStateFrm(@NotNull mucalculusParser.TrueStateFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void exitTrueStateFrm(@NotNull mucalculusParser.TrueStateFrmContext ctx) { 
-	  System.out.println("Exited TRUE \0/ ");
-	}
+	@Override public void exitTrueStateFrm(@NotNull mucalculusParser.TrueStateFrmContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
