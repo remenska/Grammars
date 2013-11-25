@@ -393,6 +393,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterMapSpec(@NotNull mucalculusParser.MapSpecContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -666,19 +679,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -686,6 +686,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -796,19 +809,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -816,6 +816,32 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -913,6 +939,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterProjDecl(@NotNull mucalculusParser.ProjDeclContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -965,19 +1004,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -985,6 +1011,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1147,6 +1186,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterTrueActionFrm(@NotNull mucalculusParser.TrueActionFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1251,6 +1303,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterConjunctionStateFrm(@NotNull mucalculusParser.ConjunctionStateFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1258,6 +1323,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitConjunctionStateFrm(@NotNull mucalculusParser.ConjunctionStateFrmContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1290,19 +1368,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1310,6 +1375,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1459,6 +1537,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1466,19 +1557,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void enterRegFrm(@NotNull mucalculusParser.RegFrmContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitRegFrm(@NotNull mucalculusParser.RegFrmContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -59,47 +59,48 @@ dataValExpr: 'val' '(' myDataExpr=dataExpr ')';                             // M
 //--- Action formulas
  
 actFrm: 
-   dataValExpr                        	 	   # DataValueExpressionActionFrm
-  | '(' actFrm ')'                    		   # BracketsActionFrm                // Brackets
+   dataValExpr                        	 	   # DataValueExpressionActionFrm    // note: included in restricted grammar
+  | '(' actFrm ')'                    		   # BracketsActionFrm                // Brackets // note: included in restricted grammar
   |  multAct                          		   # MultiAction                 // Multi-action
-  | 'true'                            		   # TrueActionFrm                        // True
-  | 'false'                           		   # FalseActionFrm                         // False
-  | '!' actFrm                       		   # NegationActionFrm            // Negation
-  | 'forall' varsDeclList '.' actFrm  		   # UniversalQuantifierActionFrm             // Universal quantifier
-  | 'exists' varsDeclList '.' actFrm 		   # ExistentialQuantifierActionFrm             // Existential quantifier
+  | 'true'                            		   # TrueActionFrm                        // True // note: included in restricted grammar
+  | 'false'                           		   # FalseActionFrm                         // False // note: included in restricted grammar
+  | '!' actFrm                       		   # NegationActionFrm            // Negation // note: included in restricted grammar
+  | 'forall' varsDeclList '.' actFrm  		   # UniversalQuantifierActionFrm             // Universal quantifier  // note: included in restricted grammar
+  | 'exists' varsDeclList '.' actFrm 		   # ExistentialQuantifierActionFrm             // Existential quantifier // note: included in restricted grammar
   | actFrm '@' dataExpr             		   # AtOperatorActionFrm      // At operator
-  | actFrm '&&' actFrm               		   # IntersectionOfActions       // Intersection of actions
-  | actFrm '||' actFrm             		   # UnionOfActions       // Union actions
+  | actFrm '&&' actFrm               		   # IntersectionOfActions       // Intersection of actions // note: included in restricted grammar
+  | actFrm '||' actFrm             		   # UnionOfActions       // Union actions // note: included in restricted grammar
   | actFrm '=>' actFrm            		   # Implication        // Implication
   ;
 
 //--- Regular formulas
-  
+
+// note: all included in the restricted grammar
 regFrm:
-  '(' regFrm ')'                                        // Brackets
-  | actFrm                                                // Action formula
-  | 'nil'           
-  | regFrm '.' regFrm                       // Sequential composition
-  | regFrm '+' regFrm                        // Alternative composition
-  | regFrm '*'                                      // Iteration
-  | regFrm '+'                                      // Non-empty iteration
+  '(' regFrm ')'                               # BracketsRegForm           // Brackets
+  | actFrm                                     # ActionFormulaRegForm             // Action formula
+  | 'nil'           				# NilRegForm 
+  | regFrm '.' regFrm                      	# SequentialCompositionRegForm 	// Sequential composition
+  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
+  | regFrm '*'                                # IterationRegForm       // Iteration
+  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration
   ;
 
 //--- State formulas
 
-stateFrm: dataValExpr            		  	# DataValueExpressionStateFrm                              // Data expression
-  | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets
-  | 'true'                                    		# TrueStateFrm                             // True
-  | 'false'    			    	 		# FalseStateFrm
-  | 'forall' varsDeclList '.' stateFrm  	  	# UniversalQuantifierStateFrm      // Universal quantification
+stateFrm: dataValExpr            		  	# DataValueExpressionStateFrm      // Data expression // note: included in restricted grammar
+  | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets // note: included in restricted grammar
+  | 'true'                                    		# TrueStateFrm                             // True // note: included in restricted grammar
+  | 'false'    			    	 		# FalseStateFrm    // False // note: included in restricted grammar
+  | 'forall' varsDeclList '.' stateFrm  	  	# UniversalQuantifierStateFrm      // Universal quantification // note: included in restricted grammar
   | 'exists' varsDeclList '.' stateFrm  	   	# ExistentialQuantifierStateFrm       // Existential quantification// False
   | '!' stateFrm                   			# NegationStateFrm            // Negation
   | 'mu' stateVarDecl '.' stateFrm     	    	# MuStateFrm    // Minimal fixed point
   | 'nu' stateVarDecl '.' stateFrm       	  	# NuStateFrm      // Maximal fixed point
-  | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction
+  | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction // note: included in restricted grammar
   | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction
   | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
-  | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality
+  | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality // note: included in restricted grammar
   | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
   | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable
   | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay

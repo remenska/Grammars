@@ -214,6 +214,13 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitExistentialQuantifierDataExpr(@NotNull mucalculusParser.ExistentialQuantifierDataExprContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#ActionFormulaRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#mapSpec}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -361,18 +368,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAtOperatorActionFrm(@NotNull mucalculusParser.AtOperatorActionFrmContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#DelayOpStateFrm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#eqnDecl}.
@@ -431,18 +438,25 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBesVar(@NotNull mucalculusParser.BesVarContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#UniversalQuantifierActionFrm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#BracketsRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#sortDecl}.
@@ -494,6 +508,13 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAction(@NotNull mucalculusParser.ActionContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#projDecl}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -522,18 +543,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitLargerDataExpr(@NotNull mucalculusParser.LargerDataExprContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#PositiveNumSort}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#NuOperator}.
@@ -620,6 +641,13 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitDisjunctionDataExpr(@NotNull mucalculusParser.DisjunctionDataExprContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#SequentialCompositionRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#TrueActionFrm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -676,11 +704,25 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#NilRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#ConjunctionStateFrm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConjunctionStateFrm(@NotNull mucalculusParser.ConjunctionStateFrmContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#NonEmptyIterationRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#FalseActionFrm}.
@@ -697,18 +739,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitVarDecl(@NotNull mucalculusParser.VarDeclContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#IntegerSort}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#constrDeclList}.
@@ -788,18 +830,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitStateVarDecl(@NotNull mucalculusParser.StateVarDeclContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#IterationRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#EmptyListDataExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#regFrm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRegFrm(@NotNull mucalculusParser.RegFrmContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#MemberShipSetBagDataExpr}.

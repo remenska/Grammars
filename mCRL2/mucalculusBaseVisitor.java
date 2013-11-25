@@ -249,6 +249,14 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitMapSpec(@NotNull mucalculusParser.MapSpecContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -417,7 +425,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -425,7 +433,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -497,7 +505,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -505,7 +513,15 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -569,6 +585,14 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitProjDecl(@NotNull mucalculusParser.ProjDeclContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -601,7 +625,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -609,7 +633,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -713,6 +737,14 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitTrueActionFrm(@NotNull mucalculusParser.TrueActionFrmContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -777,7 +809,23 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitConjunctionStateFrm(@NotNull mucalculusParser.ConjunctionStateFrmContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -801,7 +849,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -809,7 +857,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -905,7 +953,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -913,7 +961,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitRegFrm(@NotNull mucalculusParser.RegFrmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

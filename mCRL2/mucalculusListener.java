@@ -327,6 +327,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitExistentialQuantifierDataExpr(@NotNull mucalculusParser.ExistentialQuantifierDataExprContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#ActionFormulaRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#ActionFormulaRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#mapSpec}.
 	 * @param ctx the parse tree
 	 */
@@ -558,17 +569,6 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitAtOperatorActionFrm(@NotNull mucalculusParser.AtOperatorActionFrmContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#DelayOpStateFrm}.
 	 * @param ctx the parse tree
 	 */
@@ -578,6 +578,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDelayOpStateFrm(@NotNull mucalculusParser.DelayOpStateFrmContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierDataExpr(@NotNull mucalculusParser.IdentifierDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#eqnDecl}.
@@ -668,17 +679,6 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitBesVar(@NotNull mucalculusParser.BesVarContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#UniversalQuantifierActionFrm}.
 	 * @param ctx the parse tree
 	 */
@@ -688,6 +688,28 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#BracketsRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#BracketsRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#LambdaDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambdaDataExpr(@NotNull mucalculusParser.LambdaDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#sortDecl}.
@@ -767,6 +789,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitAction(@NotNull mucalculusParser.ActionContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#projDecl}.
 	 * @param ctx the parse tree
 	 */
@@ -811,17 +844,6 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitLargerDataExpr(@NotNull mucalculusParser.LargerDataExprContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#PositiveNumSort}.
 	 * @param ctx the parse tree
 	 */
@@ -831,6 +853,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPositiveNumSort(@NotNull mucalculusParser.PositiveNumSortContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#UnaryMinusDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#NuOperator}.
@@ -965,6 +998,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitDisjunctionDataExpr(@NotNull mucalculusParser.DisjunctionDataExprContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#SequentialCompositionRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#SequentialCompositionRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#TrueActionFrm}.
 	 * @param ctx the parse tree
 	 */
@@ -1053,6 +1097,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#NilRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#NilRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#ConjunctionStateFrm}.
 	 * @param ctx the parse tree
 	 */
@@ -1062,6 +1117,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConjunctionStateFrm(@NotNull mucalculusParser.ConjunctionStateFrmContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#NonEmptyIterationRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#NonEmptyIterationRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#FalseActionFrm}.
@@ -1086,17 +1152,6 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitVarDecl(@NotNull mucalculusParser.VarDeclContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#IntegerSort}.
 	 * @param ctx the parse tree
 	 */
@@ -1106,6 +1161,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIntegerSort(@NotNull mucalculusParser.IntegerSortContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#AdditionDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdditionDataExpr(@NotNull mucalculusParser.AdditionDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#constrDeclList}.
@@ -1229,6 +1295,17 @@ public interface mucalculusListener extends ParseTreeListener {
 	void exitStateVarDecl(@NotNull mucalculusParser.StateVarDeclContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mucalculusParser#IterationRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void enterIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mucalculusParser#IterationRegForm}.
+	 * @param ctx the parse tree
+	 */
+	void exitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#EmptyListDataExpr}.
 	 * @param ctx the parse tree
 	 */
@@ -1238,17 +1315,6 @@ public interface mucalculusListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEmptyListDataExpr(@NotNull mucalculusParser.EmptyListDataExprContext ctx);
-
-	/**
-	 * Enter a parse tree produced by {@link mucalculusParser#regFrm}.
-	 * @param ctx the parse tree
-	 */
-	void enterRegFrm(@NotNull mucalculusParser.RegFrmContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mucalculusParser#regFrm}.
-	 * @param ctx the parse tree
-	 */
-	void exitRegFrm(@NotNull mucalculusParser.RegFrmContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mucalculusParser#MemberShipSetBagDataExpr}.

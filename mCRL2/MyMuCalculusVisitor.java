@@ -16,5 +16,30 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 
 	}
 
+	@Override public T visitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx) { 
+	
+	System.out.println("Visited actionFormulaRegForm");
+	return visitChildren(ctx); 
+
+	}
+
+
+	@Override public T visitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx) { 
+
+	System.out.println("Visited iterationRegularForm");
+	return visitChildren(ctx); 
+
+	}
+
+
+	@Override public T visitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { 
+
+	System.out.println("Visited sequentialCompositionRegularForm");
+
+	return visitChildren(ctx); 
+
+	}
+
+
 }
 

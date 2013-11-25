@@ -706,32 +706,152 @@ public class mucalculusParser extends Parser {
 
 	public static class RegFrmContext extends ParserRuleContext {
 		public int _p;
-		public List<RegFrmContext> regFrm() {
-			return getRuleContexts(RegFrmContext.class);
-		}
-		public ActFrmContext actFrm() {
-			return getRuleContext(ActFrmContext.class,0);
-		}
-		public RegFrmContext regFrm(int i) {
-			return getRuleContext(RegFrmContext.class,i);
-		}
 		public RegFrmContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
 		public RegFrmContext(ParserRuleContext parent, int invokingState, int _p) {
 			super(parent, invokingState);
 			this._p = _p;
 		}
 		@Override public int getRuleIndex() { return RULE_regFrm; }
+	 
+		public RegFrmContext() { }
+		public void copyFrom(RegFrmContext ctx) {
+			super.copyFrom(ctx);
+			this._p = ctx._p;
+		}
+	}
+	public static class IterationRegFormContext extends RegFrmContext {
+		public RegFrmContext regFrm() {
+			return getRuleContext(RegFrmContext.class,0);
+		}
+		public IterationRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterRegFrm(this);
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterIterationRegForm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitRegFrm(this);
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitIterationRegForm(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitRegFrm(this);
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitIterationRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NilRegFormContext extends RegFrmContext {
+		public NilRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterNilRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNilRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNilRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class NonEmptyIterationRegFormContext extends RegFrmContext {
+		public RegFrmContext regFrm() {
+			return getRuleContext(RegFrmContext.class,0);
+		}
+		public NonEmptyIterationRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterNonEmptyIterationRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNonEmptyIterationRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNonEmptyIterationRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class AlternativeCompositionRegFormContext extends RegFrmContext {
+		public List<RegFrmContext> regFrm() {
+			return getRuleContexts(RegFrmContext.class);
+		}
+		public RegFrmContext regFrm(int i) {
+			return getRuleContext(RegFrmContext.class,i);
+		}
+		public AlternativeCompositionRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterAlternativeCompositionRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAlternativeCompositionRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAlternativeCompositionRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ActionFormulaRegFormContext extends RegFrmContext {
+		public ActFrmContext actFrm() {
+			return getRuleContext(ActFrmContext.class,0);
+		}
+		public ActionFormulaRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterActionFormulaRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitActionFormulaRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitActionFormulaRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class SequentialCompositionRegFormContext extends RegFrmContext {
+		public List<RegFrmContext> regFrm() {
+			return getRuleContexts(RegFrmContext.class);
+		}
+		public RegFrmContext regFrm(int i) {
+			return getRuleContext(RegFrmContext.class,i);
+		}
+		public SequentialCompositionRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterSequentialCompositionRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSequentialCompositionRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSequentialCompositionRegForm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BracketsRegFormContext extends RegFrmContext {
+		public RegFrmContext regFrm() {
+			return getRuleContext(RegFrmContext.class,0);
+		}
+		public BracketsRegFormContext(RegFrmContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterBracketsRegForm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitBracketsRegForm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBracketsRegForm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -751,6 +871,10 @@ public class mucalculusParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
 				{
+				_localctx = new BracketsRegFormContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
 				setState(134); match(35);
 				setState(135); regFrm(0);
 				setState(136); match(14);
@@ -759,12 +883,18 @@ public class mucalculusParser extends Parser {
 
 			case 2:
 				{
+				_localctx = new ActionFormulaRegFormContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(138); actFrm(0);
 				}
 				break;
 
 			case 3:
 				{
+				_localctx = new NilRegFormContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
 				setState(139); match(10);
 				}
 				break;
@@ -782,7 +912,7 @@ public class mucalculusParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
-						_localctx = new RegFrmContext(_parentctx, _parentState, _p);
+						_localctx = new SequentialCompositionRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(142);
 						if (!(4 >= _localctx._p)) throw new FailedPredicateException(this, "4 >= $_p");
@@ -793,7 +923,7 @@ public class mucalculusParser extends Parser {
 
 					case 2:
 						{
-						_localctx = new RegFrmContext(_parentctx, _parentState, _p);
+						_localctx = new AlternativeCompositionRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(145);
 						if (!(3 >= _localctx._p)) throw new FailedPredicateException(this, "3 >= $_p");
@@ -804,7 +934,7 @@ public class mucalculusParser extends Parser {
 
 					case 3:
 						{
-						_localctx = new RegFrmContext(_parentctx, _parentState, _p);
+						_localctx = new IterationRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(148);
 						if (!(2 >= _localctx._p)) throw new FailedPredicateException(this, "2 >= $_p");
@@ -814,7 +944,7 @@ public class mucalculusParser extends Parser {
 
 					case 4:
 						{
-						_localctx = new RegFrmContext(_parentctx, _parentState, _p);
+						_localctx = new NonEmptyIterationRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(150);
 						if (!(1 >= _localctx._p)) throw new FailedPredicateException(this, "1 >= $_p");
