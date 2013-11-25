@@ -4,9 +4,9 @@ start : stateFrm;
 
 // TODO: priorities?
 // TODO: sum??
-besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
+// besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
 
-besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
+// besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
 
 fixedPointOperator
   : 'mu'                                                         // Minimal fixed point operator
@@ -17,46 +17,46 @@ besVar: ID ;                                                     // BES variable
 
 
 
-besExpr: 'true'                                                       // True
-  | 'false'                                                      // False
-  | besExpr '=>' besExpr                    // Implication
-  | besExpr '||' besExpr                    // Disjunction
-  | besExpr '&&' besExpr                    // Conjunction
-  | '!' besExpr                    // Negation
-  | '(' besExpr ')'                                              // Brackets
-  | besVar                                                       // Boolean variable
-  ;
+// besExpr: 'true'                                                       // True
+//   | 'false'                                                      // False
+//   | besExpr '=>' besExpr                    // Implication
+//   | besExpr '||' besExpr                    // Disjunction
+//   | besExpr '&&' besExpr                    // Conjunction
+//   | '!' besExpr                    // Negation
+//   | '(' besExpr ')'                                              // Brackets
+//   | besVar                                                       // Boolean variable
+//   ;
 
 
 //--- PBES
 
-pbesSpec: dataSpec? globVarSpec? pbesEqnSpec pbesInit ;          // PBES specification
+// pbesSpec: dataSpec? globVarSpec? pbesEqnSpec pbesInit ;          // PBES specification
 
-pbesEqnSpec: 'pbes' pbesEqnDecl+ ;                               // Declaratioin of PBES equations
+// pbesEqnSpec: 'pbes' pbesEqnDecl+ ;                               // Declaratioin of PBES equations
 
-pbesEqnDecl: fixedPointOperator propVarDecl '=' pbesExpr ';' ;   // PBES equation
+// pbesEqnDecl: fixedPointOperator propVarDecl '=' pbesExpr ';' ;   // PBES equation
 
 
-propVarDecl: ID ( '(' varsDeclList ')' )? ;                      // PBES variable declaration
+// propVarDecl: ID ( '(' varsDeclList ')' )? ;                      // PBES variable declaration
 
-propVarInst: ID ( '(' dataExprList ')' )? ;                      // Instantiated PBES variable
+// propVarInst: ID ( '(' dataExprList ')' )? ;                      // Instantiated PBES variable
 
-pbesInit: 'init' propVarInst ';' ;                               // Initial PBES variable
+// pbesInit: 'init' propVarInst ';' ;                               // Initial PBES variable
 
 dataValExpr: 'val' '(' dataExpr ')';                             // Marked data expression
 
-pbesExpr: dataValExpr                                                  // Data expression
-  | 'true'                                                       // True
-  | 'false'                                                      // False
-  | 'forall' varsDeclList '.' pbesExpr            // Universal quantifier
-  | 'exists' varsDeclList '.' pbesExpr            // Existential quantifier
-  | pbesExpr '=>' pbesExpr                  // Implication
-  | pbesExpr '||' pbesExpr                  // Disjunction
-  | pbesExpr '&&' pbesExpr                  // Conjunction
-  | '!' pbesExpr                                  // Negation
-  | '(' pbesExpr ')'                                             // Brackets
-  | propVarInst                                                  // Propositional variable
-  ;
+// pbesExpr: dataValExpr                                                  // Data expression
+//   | 'true'                                                       // True
+//   | 'false'                                                      // False
+//   | 'forall' varsDeclList '.' pbesExpr            // Universal quantifier
+//   | 'exists' varsDeclList '.' pbesExpr            // Existential quantifier
+//   | pbesExpr '=>' pbesExpr                  // Implication
+//   | pbesExpr '||' pbesExpr                  // Disjunction
+//   | pbesExpr '&&' pbesExpr                  // Conjunction
+//   | '!' pbesExpr                                  // Negation
+//   | '(' pbesExpr ')'                                             // Brackets
+//   | propVarInst                                                  // Propositional variable
+//   ;
 
 //--- Action formulas
 
