@@ -2,8 +2,6 @@
 grammar mucalculus;
 start : stateFrm;
 
-// TODO: priorities?
-// TODO: sum??
 // besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
 
 // besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
@@ -59,10 +57,11 @@ dataValExpr: 'val' '(' dataExpr ')';                             // Marked data 
 //   ;
 
 //--- Action formulas
-
-actFrm: multAct                                              // Multi-action
+ 
+actFrm: 
+   dataValExpr  
   | '(' actFrm ')'                                       // Brackets
-  | dataValExpr                                          // Boolean data expression
+  |  multAct                                              // Multi-action
   | 'true'                                                       // True
   | 'false'                                                      // False
   | '!' actFrm                                      // Negation
@@ -75,12 +74,13 @@ actFrm: multAct                                              // Multi-action
   ;
 
 //--- Regular formulas
-
-regFrm: actFrm                                                // Action formula
-  | '(' regFrm ')'                                        // Brackets
-  | 'nil'                                                        // Empty regular formula
-  | regFrm '+' regFrm                        // Alternative composition
+  
+regFrm:
+  '(' regFrm ')'                                        // Brackets
+  | actFrm                                                // Action formula
+  | 'nil'           
   | regFrm '.' regFrm                       // Sequential composition
+  | regFrm '+' regFrm                        // Alternative composition
   | regFrm '*'                                      // Iteration
   | regFrm '+'                                      // Non-empty iteration
   ;
@@ -90,17 +90,16 @@ regFrm: actFrm                                                // Action formula
 stateFrm: dataValExpr                                           // Data expression
   | '(' stateFrm ')'                                      // Brackets
   | 'true'                                                       // True
-  | 'false'                                                      // False
+  | 'false'    
+  | 'forall' varsDeclList '.' stateFrm           // Universal quantification
+  | 'exists' varsDeclList '.' stateFrm            // Existential quantification// False
   | 'mu' stateVarDecl '.' stateFrm             // Minimal fixed point
   | 'nu' stateVarDecl '.' stateFrm               // Maximal fixed point
-  | 'forall' varsDeclList '.' stateFrm           // Universal quantification
-  | 'exists' varsDeclList '.' stateFrm            // Existential quantification
-  | stateFrm '=>' stateFrm                  // Implication
-  | stateFrm '||' stateFrm                  // Disjunction
   | stateFrm '&&' stateFrm                  // Conjunction
+  | stateFrm '||' stateFrm                  // Disjunction
+  | stateFrm '=>' stateFrm                  // Implication   | '!' stateFrm                                // Negation
   | '[' regFrm ']' stateFrm                      // Box modality
   | '<' regFrm '>' stateFrm                      // Diamond modality
-  | '!' stateFrm                                // Negation
   | ID ( '(' dataExprList ')' )?                                 // Instantiated PBES variable
   | 'delay' ( '@' dataExpr )?                                    // Delay
   | 'yaled' ( '@' dataExpr )?                                    // Yaled
@@ -138,26 +137,26 @@ dataExpr: ID                                                           // Identi
   | 'forall' varsDeclList '.' dataExpr           // Universal quantifier
   | 'exists' varsDeclList '.' dataExpr          // Existential quantifier
   | 'lambda' varsDeclList '.' dataExpr         // Lambda abstraction
-  | dataExpr '=>' dataExpr                  // Implication
-  | dataExpr '||' dataExpr                  // Conjunction
-  | dataExpr '&&' dataExpr                  // Disjunction
-  | dataExpr '==' dataExpr                   // Equality
-  | dataExpr '!=' dataExpr                   // Inequality
-  | dataExpr '<' dataExpr                    // Smaller
-  | dataExpr '<=' dataExpr                   // Smaller equal
-  | dataExpr '>=' dataExpr                   // Larger equal
-  | dataExpr '>' dataExpr                    // Larger
-  | dataExpr 'in' dataExpr                   // Set, bag, list membership
-  | dataExpr '|>' dataExpr                  // List cons
-  | dataExpr '<|' dataExpr                   // List snoc
-  | dataExpr '++' dataExpr                   // List concatenation
-  | dataExpr '+' dataExpr                   // Addition, set/bag union
-  | dataExpr '-' dataExpr                   // Subtraction, set/bag difference
-  | dataExpr '/' dataExpr                   // Division
-  | dataExpr 'div' dataExpr                 // Integer div
-  | dataExpr 'mod' dataExpr                 // Integer mod
-  | dataExpr '*' dataExpr                   // Multiplication, set/bag intersection
   | dataExpr '.' dataExpr                   // List element at position
+  | dataExpr '*' dataExpr                   // Multiplication, set/bag intersection
+  | dataExpr 'mod' dataExpr                 // Integer mod
+  | dataExpr 'div' dataExpr                 // Integer div
+  | dataExpr '/' dataExpr                   // Division
+  | dataExpr '-' dataExpr                   // Subtraction, set/bag difference
+  | dataExpr '+' dataExpr                   // Addition, set/bag union
+  | dataExpr '++' dataExpr                   // List concatenation
+  | dataExpr '<|' dataExpr                   // List snoc
+  | dataExpr '|>' dataExpr                  // List cons
+  | dataExpr 'in' dataExpr                   // Set, bag, list membership
+  | dataExpr '>' dataExpr                    // Larger
+  | dataExpr '>=' dataExpr                   // Larger equal
+  | dataExpr '<=' dataExpr                   // Smaller equal
+  | dataExpr '<' dataExpr                    // Smaller
+  | dataExpr '!=' dataExpr                   // Inequality
+  | dataExpr '==' dataExpr                   // Equality
+  | dataExpr '&&' dataExpr                  // Disjunction
+  | dataExpr '||' dataExpr                  // Conjunction
+  | dataExpr '=>' dataExpr                  // Implication
   | dataExpr 'whr' assignmentList 'end'           // Where clause
   ;
   
