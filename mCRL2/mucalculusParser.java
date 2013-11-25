@@ -815,6 +815,7 @@ public class mucalculusParser extends Parser {
 		}
 	}
 	public static class SequentialCompositionRegFormContext extends RegFrmContext {
+		public Token mySeqSign;
 		public List<RegFrmContext> regFrm() {
 			return getRuleContexts(RegFrmContext.class);
 		}
@@ -916,7 +917,7 @@ public class mucalculusParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(142);
 						if (!(2 >= _localctx._p)) throw new FailedPredicateException(this, "2 >= $_p");
-						setState(143); match(48);
+						setState(143); ((SequentialCompositionRegFormContext)_localctx).mySeqSign = match(48);
 						setState(144); regFrm(3);
 						}
 						break;

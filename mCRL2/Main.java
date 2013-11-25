@@ -1,11 +1,14 @@
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-
+import org.antlr.v4.runtime.TokenStreamRewriter;
 public class Main {
     public static void main(String[] args) throws Exception {
         mucalculusLexer lexer = new mucalculusLexer(new ANTLRFileStream("test.mu"));
+
+	CommonTokenStream tokens = new CommonTokenStream(lexer);
         mucalculusParser parser = new mucalculusParser(new CommonTokenStream(lexer));
+	TokenStreamRewriter rewriter = new TokenStreamRewriter(tokens);
         ParseTree tree = parser.start();
         MyMuCalculusVisitor visitor = new MyMuCalculusVisitor();
 
@@ -13,6 +16,6 @@ public class Main {
 
         visitor.visit(tree);
 
-	
+
     }
 }

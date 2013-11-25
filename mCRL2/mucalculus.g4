@@ -1,6 +1,6 @@
 //comment
 grammar mucalculus;
-start : stateFrm;
+start : stateFrm ;
 
 // besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
 
@@ -74,7 +74,6 @@ actFrm:
   ;
 
 //--- Regular formulas
-
 // note: all included in the restricted grammar
 regFrm:
   '(' regFrm ')'                               # BracketsRegForm           // Brackets
@@ -82,7 +81,7 @@ regFrm:
   | 'nil'           				# NilRegForm 
   | regFrm '*'                                # IterationRegForm       // Iteration
   | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration  
-  | regFrm '.' regFrm                      	# SequentialCompositionRegForm 	// Sequential composition
+  | regFrm mySeqSign='.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
   | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
   ;
 

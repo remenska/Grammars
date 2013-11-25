@@ -1,6 +1,7 @@
 // Generated from mucalculus.g4 by ANTLR 4.1
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.TokenStreamRewriter;
 
 public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 
@@ -46,7 +47,8 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 	// note: problem is, traversal is breadth-first!
 	// listeners do a depth-first traversal
 	System.out.println("Visited sequentialCompositionRegularForm");
-
+// 	rewriter.replace(ctx.mySeqSign(),"][");	
+// 	System.out.println(ctx.regFrm().getText());
 	return visitChildren(ctx); 
 
 	}
