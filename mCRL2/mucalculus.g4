@@ -7,8 +7,8 @@ start : stateFrm;
 // besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
 
 fixedPointOperator
-  : 'mu'                                                         // Minimal fixed point operator
-  | 'nu'                                                         // Maximal fixed point operator
+  : 'mu'                       # MuOperator                                  // Minimal fixed point operator
+  | 'nu'                       # NuOperator                                  // Maximal fixed point operator
   ;
   
 besVar: ID ;                                                     // BES variable
@@ -59,18 +59,18 @@ dataValExpr: 'val' '(' dataExpr ')';                             // Marked data 
 //--- Action formulas
  
 actFrm: 
-   dataValExpr  
-  | '(' actFrm ')'                                       // Brackets
-  |  multAct                                              // Multi-action
-  | 'true'                                                       // True
-  | 'false'                                                      // False
-  | '!' actFrm                                      // Negation
-  | 'forall' varsDeclList '.' actFrm                // Universal quantifier
-  | 'exists' varsDeclList '.' actFrm                // Existential quantifier
-  | actFrm '@' dataExpr                      // At operator
-  | actFrm '&&' actFrm                      // Intersection of actions
-  | actFrm '||' actFrm                      // Union actions
-  | actFrm '=>' actFrm                      // Implication
+   dataValExpr                        	 	   # DataValueExpressionActionFrm
+  | '(' actFrm ')'                    		   # BracketsActionFrm                // Brackets
+  |  multAct                          		   # MultiAction                 // Multi-action
+  | 'true'                            		   # TrueActionFrm                        // True
+  | 'false'                           		   # FalseActionFrm                         // False
+  | '!' actFrm                       		   # NegationActionFrm            // Negation
+  | 'forall' varsDeclList '.' actFrm  		   # UniversalQuantifierActionFrm             // Universal quantifier
+  | 'exists' varsDeclList '.' actFrm 		   # ExistentialQuantifierActionFrm             // Existential quantifier
+  | actFrm '@' dataExpr             		   # AtOperatorActionFrm      // At operator
+  | actFrm '&&' actFrm               		   # IntersectionOfActions       // Intersection of actions
+  | actFrm '||' actFrm             		   # UnionOfActions       // Union actions
+  | actFrm '=>' actFrm            		   # Implication        // Implication
   ;
 
 //--- Regular formulas
@@ -87,22 +87,23 @@ regFrm:
 
 //--- State formulas
 
-stateFrm: dataValExpr                                           // Data expression
-  | '(' stateFrm ')'                                      // Brackets
-  | 'true'                                                       // True
-  | 'false'    
-  | 'forall' varsDeclList '.' stateFrm           // Universal quantification
-  | 'exists' varsDeclList '.' stateFrm            // Existential quantification// False
-  | 'mu' stateVarDecl '.' stateFrm             // Minimal fixed point
-  | 'nu' stateVarDecl '.' stateFrm               // Maximal fixed point
-  | stateFrm '&&' stateFrm                  // Conjunction
-  | stateFrm '||' stateFrm                  // Disjunction
-  | stateFrm '=>' stateFrm                  // Implication   | '!' stateFrm                                // Negation
-  | '[' regFrm ']' stateFrm                      // Box modality
-  | '<' regFrm '>' stateFrm                      // Diamond modality
-  | ID ( '(' dataExprList ')' )?                                 // Instantiated PBES variable
-  | 'delay' ( '@' dataExpr )?                                    // Delay
-  | 'yaled' ( '@' dataExpr )?                                    // Yaled
+stateFrm: dataValExpr            		  	# DataValueExpressionStateFrm                              // Data expression
+  | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets
+  | 'true'                                    		# TrueStateFrm                             // True
+  | 'false'    			    	 		# FalseStateFrm
+  | 'forall' varsDeclList '.' stateFrm  	  	# UniversalQuantifierStateFrm      // Universal quantification
+  | 'exists' varsDeclList '.' stateFrm  	   	# ExistentialQuantifierStateFrm       // Existential quantification// False
+  | '!' stateFrm                   			# NegationStateFrm            // Negation
+  | 'mu' stateVarDecl '.' stateFrm     	    	# MuStateFrm    // Minimal fixed point
+  | 'nu' stateVarDecl '.' stateFrm       	  	# NuStateFrm      // Maximal fixed point
+  | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction
+  | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction
+  | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
+  | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality
+  | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
+  | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable
+  | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay
+  | 'yaled' ( '@' dataExpr )?         		 	# YaledOpStateFrm                         // Yaled
   ;
 
 stateVarDecl: ID ( '(' stateVarAssignmentList ')' )? ;           // PBES variable declaration
@@ -117,48 +118,50 @@ varsDeclList: varsDecl ( ',' varsDecl )* ;                       // Individually
 dataExprList: dataExpr ( ',' dataExpr )* ;                       // Data expression list
 
 
-dataExpr: ID                                                           // Identifier
-  | INT                                                       // Number
-  | 'true'                                                       // True
-  | 'false'                                                      // False
-  | '[' ']'                                                      // Empty list
-  | '{' '}'                                                      // Empty set
-  | '{'':''}'                                                    // Empty bag
-  | '[' dataExprList ']'                                         // List enumeration
-  | '{' bagEnumEltList '}'                                       // Bag enumeration
-  | '{' varDecl '|' dataExpr '}'                                 // Set/bag comprehension
-  | '{' dataExprList '}'                                         // Set enumeration
-  | '(' dataExpr ')'                                             // Brackets
-  | dataExpr '[' dataExpr '->' dataExpr ']'   // Function update
-  | dataExpr '(' dataExprList ')'               // Function application
-  | '!' dataExpr                                // Negation, set complement
-  | '-' dataExpr                               // Unary minus
-  | '#' dataExpr                                // Size of a list
-  | 'forall' varsDeclList '.' dataExpr           // Universal quantifier
-  | 'exists' varsDeclList '.' dataExpr          // Existential quantifier
-  | 'lambda' varsDeclList '.' dataExpr         // Lambda abstraction
-  | dataExpr '.' dataExpr                   // List element at position
-  | dataExpr '*' dataExpr                   // Multiplication, set/bag intersection
-  | dataExpr 'mod' dataExpr                 // Integer mod
-  | dataExpr 'div' dataExpr                 // Integer div
-  | dataExpr '/' dataExpr                   // Division
-  | dataExpr '-' dataExpr                   // Subtraction, set/bag difference
-  | dataExpr '+' dataExpr                   // Addition, set/bag union
-  | dataExpr '++' dataExpr                   // List concatenation
-  | dataExpr '<|' dataExpr                   // List snoc
-  | dataExpr '|>' dataExpr                  // List cons
-  | dataExpr 'in' dataExpr                   // Set, bag, list membership
-  | dataExpr '>' dataExpr                    // Larger
-  | dataExpr '>=' dataExpr                   // Larger equal
-  | dataExpr '<=' dataExpr                   // Smaller equal
-  | dataExpr '<' dataExpr                    // Smaller
-  | dataExpr '!=' dataExpr                   // Inequality
-  | dataExpr '==' dataExpr                   // Equality
-  | dataExpr '&&' dataExpr                  // Disjunction
-  | dataExpr '||' dataExpr                  // Conjunction
-  | dataExpr '=>' dataExpr                  // Implication
-  | dataExpr 'whr' assignmentList 'end'           // Where clause
+dataExpr: ID                                          # IdentifierDataExpr                // Identifier
+  | INT                                               # NumberDataExpr       // Number
+  | 'true'                                            # TrueDataExpr          // True
+  | 'false'                                           # FalseDataExpr          // False
+  | '[' ']'                                           # EmptyListDataExpr          // Empty list
+  | '{' '}'                                           # EmptySetDataExpr          // Empty set
+  | '{'':''}'                                         # EmptyBagDataExpr          // Empty bag
+  | '[' dataExprList ']'                              # ListEnumerationDataExpr          // List enumeration
+  | '{' bagEnumEltList '}'                            # BagEnumerationDataExpr          // Bag enumeration
+  | '{' varDecl '|' dataExpr '}'                      # SetBagComprehensionDataExpr         // Set/bag comprehension
+  | '{' dataExprList '}'                              # SetEnumerationDataExpr          // Set enumeration
+  | '(' dataExpr ')'                                  # BracketsDataExpr          // Brackets
+  | dataExpr '[' dataExpr '->' dataExpr ']'   		# FunctionUpdateDataExpr 	// Function update
+  | dataExpr '(' dataExprList ')'               	# FunctionApplicationDataExpr		// Function application
+  | '!' dataExpr                                	# NegationSetComplementDataExpr	// Negation, set complement
+  | '-' dataExpr                               	# UnaryMinusDataExpr	// Unary minus
+  | '#' dataExpr                                	# ListSizeDataExpr	 // Size of a list
+  | 'forall' varsDeclList '.' dataExpr           	# UniversalQuantifierDataExpr// Universal quantifier
+  | 'exists' varsDeclList '.' dataExpr          	# ExistentialQuantifierDataExpr	// Existential quantifier
+  | 'lambda' varsDeclList '.' dataExpr         	# LambdaDataExpr	// Lambda abstraction
+  | dataExpr '.' dataExpr                   		# ListElemPositionDataExpr	// List element at position
+  | dataExpr '*' dataExpr                   		# MultiplicationDataExpr	// Multiplication, set/bag intersection
+  | dataExpr 'mod' dataExpr                 		# IntegerModDataExpr	// Integer mod
+  | dataExpr 'div' dataExpr                 		# IntegerDivDataExpr	// Integer div
+  | dataExpr '/' dataExpr                   		# DivisionDataExpr	// Division
+  | dataExpr '-' dataExpr                  		# SubtractionDataExpr	// Subtraction, set/bag difference
+  | dataExpr '+' dataExpr                   		# AdditionDataExpr	// Addition, set/bag union
+  | dataExpr '++' dataExpr                   		# ListConcatenationDataExpr	// List concatenation
+  | dataExpr '<|' dataExpr                   		# ListSnocDataExpr	// List snoc
+  | dataExpr '|>' dataExpr                  		# ListConsDataExpr	// List cons
+  | dataExpr 'in' dataExpr                   		# MemberShipSetBagDataExpr	// Set, bag, list membership
+  | dataExpr '>' dataExpr                    		# LargerDataExpr	// Larger
+  | dataExpr '>=' dataExpr                   		# LargerEqualDataExpr	// Larger equal
+  | dataExpr '<=' dataExpr                   		# SmallerEqualDataExpr	// Smaller equal
+  | dataExpr '<' dataExpr                    		# SmallerDataExpr	// Smaller
+  | dataExpr '!=' dataExpr                   		# InequalityDataExpr	// Inequality
+  | dataExpr '==' dataExpr                   		# EqualityDataExpr	// Equality
+  | dataExpr '&&' dataExpr                  		# DisjunctionDataExpr	// Disjunction
+  | dataExpr '||' dataExpr                  		# ConjunctionDataExpr	// Conjunction
+  | dataExpr '=>' dataExpr                  		# ImplicationDataExpr	// Implication
+  | dataExpr 'whr' assignmentList 'end'           	# WhereClauseDataExpr	// Where clause
   ;
+  
+ 
   
 multAct: 'tau'                                                        // Tau, hidden action, empty multi-action
   | actionList                                                   // Multi-action
@@ -185,19 +188,19 @@ assignment: ID '=' dataExpr ;                                    // Assignment
 
 action: ID ( '(' dataExprList ')' )? ;                           // Action, process instantiation
 
-simpleSortExpr: 'Bool'                                                       // Booleans
-  | 'Pos'                                                        // Positive numbers
-  | 'Nat'                                                        // Natural numbers
-  | 'Int'                                                        // Integers
-  | 'Real'                                                       // Reals
-  | 'List' '(' sortExpr ')'                                      // List sort
-  | 'Set' '(' sortExpr ')'                                       // Set sort
-  | 'Bag' '(' sortExpr ')'                                       // Bag sort
-  | 'FSet' '(' sortExpr ')'                                      // Finite set sort
-  | 'FBag' '(' sortExpr ')'                                      // Finite bag sort
-  | ID                                                           // Sort reference
-  | '(' sortExpr ')'                                             // Sort expression with parentheses
-  | 'struct' constrDeclList                                      // Structured sort
+simpleSortExpr: 'Bool'                                      # BooleanSort                 // Booleans
+  | 'Pos'                                                   # PositiveNumSort     // Positive numbers
+  | 'Nat'                                                   # NaturalNumSort     // Natural numbers
+  | 'Int'                                                   # IntegerSort     // Integers
+  | 'Real'                                                  # RealSort     // Reals
+  | 'List' '(' sortExpr ')'                                 # ListSort     // List sort
+  | 'Set' '(' sortExpr ')'                                  # SetSort     // Set sort
+  | 'Bag' '(' sortExpr ')'                                  # BagSort     // Bag sort
+  | 'FSet' '(' sortExpr ')'                                 # FiniteSetSort     // Finite set sort
+  | 'FBag' '(' sortExpr ')'                                 # FiniteBagSort     // Finite bag sort
+  | ID                                                      # SortReference     // Sort reference
+  | '(' sortExpr ')'                                        # ParenthesisSort     // Sort expression with parentheses
+  | 'struct' constrDeclList                                 # StructuredSort     // Structured sort
   ;
 
 hashArgs: simpleSortExpr ('#' simpleSortExpr)* ;                 // Simple product sort
