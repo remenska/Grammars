@@ -26,11 +26,20 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 
 	@Override public T visitNonEmptyIterationRegForm(@NotNull mucalculusParser.NonEmptyIterationRegFormContext ctx) { 
 
-	System.out.println("Visited iterationRegularForm");
+	System.out.println("Visited non-empty + iterationRegularForm");
 	return visitChildren(ctx); 
 
 	}
 
+	@Override public T visitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx) { 
+	System.out.println("Visited * iterationRegularForm: " + ctx.regFrm.getText());
+// 	mucalculusParser.RegFrmContext e = ctx.regFrm();
+//         System.out.println("AND -> " + e.getText());
+    
+
+	return visitChildren(ctx); 
+
+	}
 
 	@Override public T visitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { 
 
@@ -40,6 +49,12 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 
 	}
 
+	@Override public T visitAction(@NotNull mucalculusParser.ActionContext ctx) { 
+          System.out.println("proc Monitor_"+ctx.ID() + " = " + ctx.ID() + "_mon ;");
 
-}
+	System.out.println("Visited action");
+
+      return visitChildren(ctx); }
+
+	}
 

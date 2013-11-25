@@ -915,9 +915,9 @@ public class mucalculusParser extends Parser {
 						_localctx = new SequentialCompositionRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(142);
-						if (!(4 >= _localctx._p)) throw new FailedPredicateException(this, "4 >= $_p");
+						if (!(2 >= _localctx._p)) throw new FailedPredicateException(this, "2 >= $_p");
 						setState(143); match(48);
-						setState(144); regFrm(5);
+						setState(144); regFrm(3);
 						}
 						break;
 
@@ -926,9 +926,9 @@ public class mucalculusParser extends Parser {
 						_localctx = new AlternativeCompositionRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(145);
-						if (!(3 >= _localctx._p)) throw new FailedPredicateException(this, "3 >= $_p");
+						if (!(1 >= _localctx._p)) throw new FailedPredicateException(this, "1 >= $_p");
 						setState(146); match(50);
-						setState(147); regFrm(4);
+						setState(147); regFrm(2);
 						}
 						break;
 
@@ -937,7 +937,7 @@ public class mucalculusParser extends Parser {
 						_localctx = new IterationRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(148);
-						if (!(2 >= _localctx._p)) throw new FailedPredicateException(this, "2 >= $_p");
+						if (!(4 >= _localctx._p)) throw new FailedPredicateException(this, "4 >= $_p");
 						setState(149); match(2);
 						}
 						break;
@@ -947,7 +947,7 @@ public class mucalculusParser extends Parser {
 						_localctx = new NonEmptyIterationRegFormContext(new RegFrmContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_regFrm);
 						setState(150);
-						if (!(1 >= _localctx._p)) throw new FailedPredicateException(this, "1 >= $_p");
+						if (!(3 >= _localctx._p)) throw new FailedPredicateException(this, "3 >= $_p");
 						setState(151); match(50);
 						}
 						break;
@@ -5163,13 +5163,13 @@ public class mucalculusParser extends Parser {
 	}
 	private boolean regFrm_sempred(RegFrmContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 4: return 4 >= _localctx._p;
+		case 4: return 2 >= _localctx._p;
 
-		case 5: return 3 >= _localctx._p;
+		case 5: return 1 >= _localctx._p;
 
-		case 6: return 2 >= _localctx._p;
+		case 6: return 4 >= _localctx._p;
 
-		case 7: return 1 >= _localctx._p;
+		case 7: return 3 >= _localctx._p;
 		}
 		return true;
 	}

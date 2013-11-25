@@ -80,10 +80,10 @@ regFrm:
   '(' regFrm ')'                               # BracketsRegForm           // Brackets
   | actFrm                                     # ActionFormulaRegForm             // Action formula
   | 'nil'           				# NilRegForm 
+  | regFrm '*'                                # IterationRegForm       // Iteration
+  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration  
   | regFrm '.' regFrm                      	# SequentialCompositionRegForm 	// Sequential composition
   | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
-  | regFrm '*'                                # IterationRegForm       // Iteration
-  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration
   ;
 
 //--- State formulas
