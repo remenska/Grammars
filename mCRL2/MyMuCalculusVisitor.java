@@ -32,7 +32,7 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 	}
 
 	@Override public T visitIterationRegForm(@NotNull mucalculusParser.IterationRegFormContext ctx) { 
-	System.out.println("Visited * iterationRegularForm: " + ctx.regFrm.getText());
+	System.out.println("Visited * iterationRegularForm: " + ctx.regFrm().getText());
 // 	mucalculusParser.RegFrmContext e = ctx.regFrm();
 //         System.out.println("AND -> " + e.getText());
     
@@ -42,7 +42,9 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 	}
 
 	@Override public T visitSequentialCompositionRegForm(@NotNull mucalculusParser.SequentialCompositionRegFormContext ctx) { 
-
+// 	System.out.print(".");
+	// note: problem is, traversal is breadth-first!
+	// listeners do a depth-first traversal
 	System.out.println("Visited sequentialCompositionRegularForm");
 
 	return visitChildren(ctx); 
@@ -50,11 +52,12 @@ public class MyMuCalculusVisitor<T> extends mucalculusBaseVisitor<T> {
 	}
 
 	@Override public T visitAction(@NotNull mucalculusParser.ActionContext ctx) { 
-          System.out.println("proc Monitor_"+ctx.ID() + " = " + ctx.ID() + "_mon ;");
+//           System.out.println("proc Monitor_"+ctx.ID() + " = " + ctx.ID() + "_mon ;   % visited action");
 
-	System.out.println("Visited action");
+	System.out.println("Visited action: " + ctx.ID().getText());
+      return visitChildren(ctx); 
 
-      return visitChildren(ctx); }
+}
 
 	}
 

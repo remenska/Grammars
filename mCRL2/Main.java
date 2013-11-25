@@ -8,6 +8,11 @@ public class Main {
         mucalculusParser parser = new mucalculusParser(new CommonTokenStream(lexer));
         ParseTree tree = parser.start();
         MyMuCalculusVisitor visitor = new MyMuCalculusVisitor();
+
+       MyMuCalculusListener extractor = new MyMuCalculusListener();
+
         visitor.visit(tree);
+
+	
     }
 }
