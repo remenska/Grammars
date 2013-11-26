@@ -432,13 +432,6 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitYaledOpStateFrm(@NotNull mucalculusParser.YaledOpStateFrmContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#besVar}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBesVar(@NotNull mucalculusParser.BesVarContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#UniversalQuantifierActionFrm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -502,18 +495,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitVarsDeclList(@NotNull mucalculusParser.VarsDeclListContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#action}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAction(@NotNull mucalculusParser.ActionContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#action}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAction(@NotNull mucalculusParser.ActionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#projDecl}.
@@ -556,13 +549,6 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#NuOperator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#WhereClauseDataExpr}.
@@ -696,13 +682,6 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetSort(@NotNull mucalculusParser.SetSortContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#MuOperator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#NilRegForm}.

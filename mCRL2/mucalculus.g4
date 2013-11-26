@@ -2,59 +2,8 @@
 grammar mucalculus;
 start : stateFrm ;
 
-// besEqnSpec: 'bes' besEqnDecl+ ;                                  // Boolean equation declaration
-
-// besEqnDecl: fixedPointOperator besVar '=' besExpr ';' ;          // Boolean fixed poinst equation
-
-fixedPointOperator
-  : 'mu'                       # MuOperator                                  // Minimal fixed point operator
-  | 'nu'                       # NuOperator                                  // Maximal fixed point operator
-  ;
-  
-besVar: ID ;                                                     // BES variable
-
-
-
-// besExpr: 'true'                                                       // True
-//   | 'false'                                                      // False
-//   | besExpr '=>' besExpr                    // Implication
-//   | besExpr '||' besExpr                    // Disjunction
-//   | besExpr '&&' besExpr                    // Conjunction
-//   | '!' besExpr                    // Negation
-//   | '(' besExpr ')'                                              // Brackets
-//   | besVar                                                       // Boolean variable
-//   ;
-
-
-//--- PBES
-
-// pbesSpec: dataSpec? globVarSpec? pbesEqnSpec pbesInit ;          // PBES specification
-
-// pbesEqnSpec: 'pbes' pbesEqnDecl+ ;                               // Declaratioin of PBES equations
-
-// pbesEqnDecl: fixedPointOperator propVarDecl '=' pbesExpr ';' ;   // PBES equation
-
-
-// propVarDecl: ID ( '(' varsDeclList ')' )? ;                      // PBES variable declaration
-
-// propVarInst: ID ( '(' dataExprList ')' )? ;                      // Instantiated PBES variable
-
-// pbesInit: 'init' propVarInst ';' ;                               // Initial PBES variable
 
 dataValExpr: 'val' '(' myDataExpr=dataExpr ')';                             // Marked data expression
-
-// pbesExpr: dataValExpr                                                  // Data expression
-//   | 'true'                                                       // True
-//   | 'false'                                                      // False
-//   | 'forall' varsDeclList '.' pbesExpr            // Universal quantifier
-//   | 'exists' varsDeclList '.' pbesExpr            // Existential quantifier
-//   | pbesExpr '=>' pbesExpr                  // Implication
-//   | pbesExpr '||' pbesExpr                  // Disjunction
-//   | pbesExpr '&&' pbesExpr                  // Conjunction
-//   | '!' pbesExpr                                  // Negation
-//   | '(' pbesExpr ')'                                             // Brackets
-//   | propVarInst                                                  // Propositional variable
-//   ;
 
 //--- Action formulas
  
@@ -76,13 +25,13 @@ actFrm:
 //--- Regular formulas
 // note: all included in the restricted grammar
 regFrm:
-  '(' regFrm ')'                               # BracketsRegForm           // Brackets
-  | actFrm                                     # ActionFormulaRegForm             // Action formula
-  | 'nil'           				# NilRegForm 
-  | regFrm '*'                                # IterationRegForm       // Iteration
-  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration  
-  | regFrm mySeqSign='.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
-  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
+  '(' regFrm ')'                               # BracketsRegForm           // Brackets //note: included in restricted grammar
+  | actFrm                                     # ActionFormulaRegForm             // Action formula //note: included in restricted grammar
+  | 'nil'           				# NilRegForm  //note: included in restricted grammar
+  | regFrm '*'                                # IterationRegForm       // Iteration //note: included in restricted grammar
+  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration   //note: included in restricted grammar
+  | regFrm '.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
+  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition //note: included in restricted grammar
   ;
 
 //--- State formulas
@@ -101,7 +50,7 @@ stateFrm: dataValExpr            		  	# DataValueExpressionStateFrm      // Data
   | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
   | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality // note: included in restricted grammar
   | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
-  | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable
+  | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable // note: included in restricted grammar
   | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay
   | 'yaled' ( '@' dataExpr )?         		 	# YaledOpStateFrm                         // Yaled
   ;
@@ -239,24 +188,6 @@ sortDecl: idList ';'                                                   // List o
 
 idsDecl: idList ':' sortExpr ;                                   // Typed parameters
 
-  
-//--- Action Rename Specifications
-
-// actionRenameSpec: (SortSpec | ConsSpec | MapSpec | EqnSpec | ActSpec | ActionRenameRuleSpec)+ ; // Action rename specification
-
-// ActionRenameRuleSpec: VarSpec? 'rename' ActionRenameRule+ ;      // Action rename rule section
-
-// ActionRenameRule: (dataExpr '->')? Action '=>' ActionRenameRuleRHS ';' ; // Conditional action renaming
-
-// ActionRenameRuleRHS
-//   : Action                                                       // Action
-//   | 'tau'                                                        // Tau, hidden action, empty multi-action
-//   | 'delta'                                                      // Delta, deadlock, inaction
-//   ;
-//   
-
-// id :  'aman';
-//
 ID  :   LETTER (LETTER | [0-9])* ; 
 fragment
 LETTER : [a-zA-Z_] ;

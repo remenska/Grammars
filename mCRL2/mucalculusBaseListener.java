@@ -797,19 +797,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterBesVar(@NotNull mucalculusParser.BesVarContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitBesVar(@NotNull mucalculusParser.BesVarContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -927,19 +914,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterAction(@NotNull mucalculusParser.ActionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitAction(@NotNull mucalculusParser.ActionContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -947,6 +921,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterAction(@NotNull mucalculusParser.ActionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitAction(@NotNull mucalculusParser.ActionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1025,19 +1012,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void enterNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1285,19 +1259,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitSetSort(@NotNull mucalculusParser.SetSortContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void enterMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
