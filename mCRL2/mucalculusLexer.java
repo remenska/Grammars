@@ -1,4 +1,5 @@
-// Generated from mucalculus.g4 by ANTLR 4.1
+// Generated from info/remenska/PASS/monitor/mCRL2/mucalculus.g4 by ANTLR 4.1
+package info.remenska.PASS.monitor.mCRL2;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

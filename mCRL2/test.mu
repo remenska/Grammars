@@ -5,4 +5,4 @@
 % [true*][P.(!S)*.R]false
 % this would be equal to:
 % [true*.P.(R + (!S)+.R)]false
-[true*.P][S*][R]false
+[true*.P][(S || Q)*][R]false
