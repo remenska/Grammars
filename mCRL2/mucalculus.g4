@@ -54,9 +54,9 @@ actFrm:
    dataValExpr                        	 	   # DataValueExpressionActionFrm    // note: included in restricted grammar
   | '(' actFrm ')'                    		   # BracketsActionFrm                // Brackets // note: included in restricted grammar
   |  multAct                          		   # MultiAction                 // Multi-action
+  | '!' actFrm                       		   # NegationActionFrm            // Negation // note: included in restricted grammar
   | 'true'                            		   # TrueActionFrm                        // True // note: included in restricted grammar
   | 'false'                           		   # FalseActionFrm                         // False // note: included in restricted grammar
-  | '!' actFrm                       		   # NegationActionFrm            // Negation // note: included in restricted grammar
   | actFrm '@' dataExpr             		   # AtOperatorActionFrm      // At operator
   | actFrm '&&' actFrm               		   # IntersectionOfActions       // Intersection of actions // note: included in restricted grammar
   | actFrm '||' actFrm             		   # UnionOfActions       // Union actions // note: included in restricted grammar

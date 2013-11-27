@@ -141,7 +141,8 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(!actions.contains(ctx.getText()))
 			actions.add(ctx.getText());
 		
-      return visitChildren(ctx); 
+//      return visitChildren(ctx); 
+		return new String(ctx.getText());
 
 }
 	@Override public String visitBoxModalityStateFrm(@NotNull mucalculusParser.BoxModalityStateFrmContext ctx) { 
@@ -227,6 +228,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitIntersectionOfActions(@NotNull mucalculusParser.IntersectionOfActionsContext ctx) { 
+		System.out.println("Visited IntersectionOfActions: " + ctx.getText());
 		return visitChildren(ctx); 
 		
 	}
@@ -285,13 +287,27 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		
 	}
 
-	@Override public String visitNegationActionFrm(@NotNull mucalculusParser.NegationActionFrmContext ctx) { return visitChildren(ctx); }
+	@Override public String visitNegationActionFrm(@NotNull mucalculusParser.NegationActionFrmContext ctx) { 
+		System.out.println("Visited negationActionFormula: " + ctx.actFrm().getText());
+//		System.out.println("not(" + visit(ctx.actFrm()) + ")");
+		return new String("not(" + visit(ctx.actFrm()) +")"); 
+		
+	}
 
 	@Override public String visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
 
 	@Override public String visitExistentialQuantifierActionFrm(@NotNull mucalculusParser.ExistentialQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
 
-	@Override public String visitUnionOfActions(@NotNull mucalculusParser.UnionOfActionsContext ctx) { return visitChildren(ctx); }
+	@Override public String visitUnionOfActions(@NotNull mucalculusParser.UnionOfActionsContext ctx) { 
+		
+		System.out.println("Visited unionOfActions: " + ctx.getText());
+//		ctx.actFrm();
+//		System.out.println("or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+		return new String("or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+
+//		return visitChildren(ctx); 
+		
+	}
 
 	@Override public String visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { 
 		String monProc, monProc1;
