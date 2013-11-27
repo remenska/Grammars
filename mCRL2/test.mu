@@ -1,1 +1,1 @@
-forall x:Nat.[true*.P.(S || Q)+.R]false
+forall x,y:Nat.[(!a+!b)*.P(x).(S || Q)*.R]false

@@ -551,6 +551,13 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitUnaryMinusDataExpr(@NotNull mucalculusParser.UnaryMinusDataExprContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#NuOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#WhereClauseDataExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -682,6 +689,13 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetSort(@NotNull mucalculusParser.SetSortContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#MuOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#NilRegForm}.

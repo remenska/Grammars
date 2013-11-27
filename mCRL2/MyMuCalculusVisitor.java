@@ -2,26 +2,31 @@ package info.remenska.PASS.monitor.mCRL2;
 
 // Generated from mucalculus.g4 by ANTLR 4.1
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 
 import info.remenska.PASS.monitor.mCRL2.mucalculusParser.BoxModalityStateFrmContext;
 import info.remenska.PASS.monitor.mCRL2.mucalculusParser.BracketsStateFrmContext;
 import info.remenska.PASS.monitor.mCRL2.mucalculusParser.ConjunctionStateFrmContext;
+import info.remenska.PASS.monitor.mCRL2.mucalculusParser.IdListContext;
 import info.remenska.PASS.monitor.mCRL2.mucalculusParser.NonEmptyIterationRegFormContext;
 import info.remenska.PASS.monitor.mCRL2.mucalculusParser.RegFrmContext;
 
 import org.antlr.v4.runtime.BufferedTokenStream;
+import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 
 public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
-	BufferedTokenStream tokens;
-    static TokenStreamRewriter rewriter;
-
+	public static BufferedTokenStream tokens;
+    public static TokenStreamRewriter rewriter;
+    public static LinkedList<String> actions = new LinkedList<String>();
+    public static Hashtable<String,String> varDeclarations = new Hashtable<String,String>();
 	public MyMuCalculusVisitor(BufferedTokenStream tokens) {
 		this.tokens = tokens;
 		rewriter = new TokenStreamRewriter(tokens);
@@ -31,13 +36,14 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
      = new Hashtable<String, Integer>();
 	 int counter = 1;
 	@Override public String visitStart(@NotNull mucalculusParser.StartContext ctx) { 	
+//		System.out.println("Visited Start: " + ctx.getText());
 		String monProc = "Mon_\"" + ctx.getText() + "\"";
 		if(monitorProcesses.get(monProc)==null)
 			monitorProcesses.put(monProc, new Integer(counter++));
 		
-		System.out.println("proc Monitor = " + "Mon_" + monitorProcesses.get(monProc) + ";");
+//		System.out.println("proc Monitor = " + "Mon_" + monitorProcesses.get(monProc) + ";");
 			
-//		System.out.println("proc Monitor = " + "Mon_\"" + ctx.getText()+"\";");
+		System.out.println("proc Monitor = " + "Mon_\"" + ctx.getText()+"\";");
 		
 		return visitChildren(ctx); 
 	
@@ -70,8 +76,8 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			monitorProcesses.put(monProc, new Integer(counter++));
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
-		System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
-//		System.out.println("proc Mon_\"" + ctx.getText() + "\" = Mon_\"" + ctx.getText() + "\". " + "Mon_\"" + ctx.getText() + "\";");
+//		System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
+		System.out.println("proc Mon_\"" + ctx.getText() + "\" = Mon_\"" + ctx.regFrm().getText() + "\". " + "Mon_\"" + ctx.getText() + "\";");
 	return visitChildren(ctx); 
 
 	}
@@ -86,31 +92,60 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	monProc = "Mon_\"" + ctx.getText() + "\"";
 	monProc1 = "Mon_" + ctx.regFrm(0).getText() + "\"";
 	monProc2 = "Mon_\"" + ctx.regFrm(1).getText() + "\"";
-	if(monitorProcesses.get(monProc)==null)
+	
+    Token t1 = (Token) ctx.regFrm(0).start;
+    Token t2 = (Token) ctx.regFrm(0).stop;
+
+    int i = t1.getTokenIndex();
+
+//    System.out.println("TOKEN start = " + t1.getText()+" end = " + t2.getText());
+// if TOKEN.end = * then do the rewrite
+    
+//    System.out.println("TOKEN INDEX = " + i);
+//    System.out.println("Tokens size = " + tokens.size());
+//    rewriter.replace(t1, "amaaan");
+    
+//    if(t2.getText().equals("*") && tokens.get(t2.getTokenIndex()+1).getText().equals(".")){
+    if(tokens.get(t2.getTokenIndex()+1).getText().equals(".")){
+    	// transformation
+//    	System.out.println(tokens.get(t2.getTokenIndex()+1).getText());
+    		rewriter.delete(t2.getTokenIndex()+1);
+    		rewriter.insertAfter(t2.getTokenIndex(), "][");
+//    	return visit(ctx.getParent());
+    	//we're ready
+    }
+    	
+    if(monitorProcesses.get(monProc)==null)
 		monitorProcesses.put(monProc, new Integer(counter++));
 	if(monitorProcesses.get(monProc1)==null)
 		monitorProcesses.put(monProc1, new Integer(counter++));
 	if(monitorProcesses.get(monProc2) == null)
 		monitorProcesses.put(monProc2, new Integer(counter++));
- 	System.out.println("proc Mon_" + monitorProcesses.get(monProc)+ " = Mon_" + monitorProcesses.get(monProc1)+ " . " +  "Mon_"+ monitorProcesses.get(monProc2)+ ";");
+// 	System.out.println("proc Mon_" + monitorProcesses.get(monProc)+ " = Mon_" + monitorProcesses.get(monProc1)+ " . " +  "Mon_"+ monitorProcesses.get(monProc2)+ ";");
 
-// 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm(0).getText() + "\"." + "Mon_\"" + ctx.regFrm(1).getText() + "\";");
+ 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm(0).getText() + "\"." + "Mon_\"" + ctx.regFrm(1).getText() + "\";");
 
 	return visitChildren(ctx); 
 
 	}
 
-	@Override public String visitAction(@NotNull mucalculusParser.ActionContext ctx) { 
+	@Override public String visitAction(@NotNull mucalculusParser.ActionContext ctx) {
+		// TODO: this needs to be modified in case of actions with dataExprList
 		String monProc = "Mon_\"" + ctx.getText() + "\"";
+//		System.out.println("data? " + ctx.dataExprList());
 		if(monitorProcesses.get(monProc)==null)
 			monitorProcesses.put(monProc, new Integer(counter++));
-		System.out.println("proc Mon_" +monitorProcesses.get(monProc) +  " = act_" + ctx.ID().getText() + ";");
+//		System.out.println("proc Mon_" +monitorProcesses.get(monProc) +  " = act_" + ctx.ID().getText() + ";");
+		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.ID().getText() + ";");
 		
-//		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.ID().getText() + ";");
+		if(!actions.contains(ctx.getText()))
+			actions.add(ctx.getText());
+		
       return visitChildren(ctx); 
 
 }
 	@Override public String visitBoxModalityStateFrm(@NotNull mucalculusParser.BoxModalityStateFrmContext ctx) { 
+//		System.out.println("Box modality: " + ctx.getText());
 		String monProc, monProc1, monProc2;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.regFrm().getText() + "\"";
@@ -122,29 +157,31 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc2) == null)
 			monitorProcesses.put(monProc2, new Integer(counter++));
 		
-		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_"  + monitorProcesses.get(monProc1)+ " . Mon_" + monitorProcesses.get(monProc2)  + ";" );
-//		System.out.println("proc Mon_\"" + ctx.getText()+"\" = " + "Mon_\"" + ctx.regFrm().getText() +"\" . Mon_\"" + ctx.stateFrm().getText() +"\";" );
+//		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_"  + monitorProcesses.get(monProc1)+ " . Mon_" + monitorProcesses.get(monProc2)  + ";" );
+		System.out.println("proc Mon_\"" + ctx.getText()+"\" = " + "Mon_\"" + ctx.regFrm().getText() +"\" . Mon_\"" + ctx.stateFrm().getText() +"\";" );
 
-//        TokenStreamRewriter rewriter = new TokenStreamRewriter();
-        Token t1 = (Token) ctx.regFrm().start;
-        
-        int i = t1.getTokenIndex();
-
-        System.out.println("TOKEN " + t1.getText());
-
-        System.out.println("TOKEN INDEX = " + i);
-        System.out.println("Tokens size = " + tokens.size());
-        rewriter.replace(t1, "amaaan");
-//	  if (ctx.regFrm() instanceof mucalculusParser.IterationRegFormContext) {
-////		  System.out.println("YESS"); //this means expansion is necessary
+	  if (ctx.regFrm() instanceof mucalculusParser.IterationRegFormContext) {
+//		  System.out.println("YESS"); //this means expansion is necessary
 //		  //[regForm*]stateForm = (stateForm && [regForm+]stateForm)
 //		  // build this (...)
 //		  BracketsStateFrmContext _localctx = new BracketsStateFrmContext(ctx);
 //		  // build this (... && ...)
 //		  ConjunctionStateFrmContext _localctx1 = new ConjunctionStateFrmContext(_localctx);
 //		  
-//		  mucalculusParser.RegFrmContext child1 = ctx.regFrm();
-//		  mucalculusParser.StateFrmContext child2 = ctx.stateFrm();
+		  mucalculusParser.RegFrmContext child1 = ctx.regFrm();
+		  mucalculusParser.StateFrmContext child2 = ctx.stateFrm();
+//		  System.out.println("Child 1:" + child1.getText());
+//		  System.out.println("Child 2:" + child2.getText());
+		  
+		  mucalculusParser.RegFrmContext child1modified = (RegFrmContext) ctx.regFrm().getChild(0);
+		  Token t1 = (Token) child1.start;
+		  Token t2 = (Token) child1.stop;
+//        System.out.println("TOKEN " + t1.getText());
+//        System.out.println(rewriter.getText(new Interval(t1.getTokenIndex(), t2.getTokenIndex())));
+//        System.out.println(t1.getTokenIndex() + " : " + t2.getTokenIndex());
+        rewriter.insertAfter(t2.getTokenIndex(), "(false"+ " + " + child1modified.getText() +"+" +")");
+        rewriter.delete(t1.getTokenIndex(), t2.getTokenIndex());
+		  // now replace [child1*]child2 = ([nil]child2 && [child1+]child2)
 //		  
 //		  // build this: regForm+
 //		  mucalculusParser.RegFrmContext child1modified = (RegFrmContext) child1.getChild(0);
@@ -165,7 +202,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 ////		  _localctx.addChild(matchedToken)
 //		  return visit(_localctx);
 //		  
-//	  } else
+	  }
 		  return visitChildren(ctx);
 
 	  }
@@ -183,9 +220,9 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc2) == null)
 			monitorProcesses.put(monProc2, new Integer(counter++));
 		
-		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
+//		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
 
-//		System.out.println("proc Mon_\"" + ctx.getText() + "\" = " + "Mon_\"" + ctx.stateFrm(0).getText()+"\" + " + "Mon_\"" + ctx.stateFrm(1).getText() + "\";");
+		System.out.println("proc Mon_\"" + ctx.getText() + "\" = " + "Mon_\"" + ctx.stateFrm(0).getText()+"\" + " + "Mon_\"" + ctx.stateFrm(1).getText() + "\";");
 		return visitChildren(ctx); 
 	}
 
@@ -199,6 +236,16 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsStateFrm(@NotNull mucalculusParser.BracketsStateFrmContext ctx) { 
+		
+		String monProc, monProc1;
+		monProc = "Mon_\"" + ctx.getText() + "\"";
+		monProc1 = "Mon_" + ctx.stateFrm().getText() + "\"";
+		if(monitorProcesses.get(monProc)==null)
+			monitorProcesses.put(monProc, new Integer(counter++));
+		if(monitorProcesses.get(monProc1)==null)
+			monitorProcesses.put(monProc1, new Integer(counter++));
+		
+	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.stateFrm().getText() + "\";");
 		return visitChildren(ctx); 
 	}
 	
@@ -208,6 +255,16 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsActionFrm(@NotNull mucalculusParser.BracketsActionFrmContext ctx) { 
+		
+		String monProc, monProc1;
+		monProc = "Mon_\"" + ctx.getText() + "\"";
+		monProc1 = "Mon_" + ctx.actFrm().getText() + "\"";
+		if(monitorProcesses.get(monProc)==null)
+			monitorProcesses.put(monProc, new Integer(counter++));
+		if(monitorProcesses.get(monProc1)==null)
+			monitorProcesses.put(monProc1, new Integer(counter++));
+		
+	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.actFrm().getText() + "\";");
 		return visitChildren(ctx); 
 		
 	}
@@ -236,7 +293,18 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
 	@Override public String visitUnionOfActions(@NotNull mucalculusParser.UnionOfActionsContext ctx) { return visitChildren(ctx); }
 
-	@Override public String visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { return visitChildren(ctx); }
+	@Override public String visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { 
+		String monProc, monProc1;
+		monProc = "Mon_\"" + ctx.getText() + "\"";
+		monProc1 = "Mon_" + ctx.regFrm().getText() + "\"";
+		if(monitorProcesses.get(monProc)==null)
+			monitorProcesses.put(monProc, new Integer(counter++));
+		if(monitorProcesses.get(monProc1)==null)
+			monitorProcesses.put(monProc1, new Integer(counter++));
+		
+	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm().getText() + "\";");
+		return visitChildren(ctx); 
+	}
 
 	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { return visitChildren(ctx); }
 
@@ -252,9 +320,9 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc2) == null)
 			monitorProcesses.put(monProc2, new Integer(counter++));
 		
-		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
+//		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
 
-//	 	System.out.print("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm(0).getText() + "\" + " + "Mon_\"" + ctx.regFrm(1).getText() + "\";");
+	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm(0).getText() + "\" + " + "Mon_\"" + ctx.regFrm(1).getText() + "\";");
 		return visitChildren(ctx); 
 		
 	}
@@ -271,7 +339,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	@Override
 	public String visitUniversalQuantifierStateFrm(
 			@NotNull mucalculusParser.UniversalQuantifierStateFrmContext ctx) {
-		
+//		System.out.println("Visited UniversalQuantifierStateFrm: " + ctx.getText()+" = " + ctx.varsDeclList().getText() + "  " + ctx.stateFrm().getText());
 		String monProc, monProc1, monProc2;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc2 = "Mon_\"" + ctx.stateFrm().getText() + "\"";
@@ -280,9 +348,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc2) == null)
 			monitorProcesses.put(monProc2, new Integer(counter++));
 
-		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = sum " + ctx.varsDeclList().getText()+". Mon_" + monitorProcesses.get(monProc2)+ ";");
+//		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = sum " + ctx.varsDeclList().getText()+". Mon_" + monitorProcesses.get(monProc2)+ ";");
 	
-//		System.out.println("proc Mon_\"" + ctx.getText() + "\" = sum " + ctx.varsDeclList().getText()+". Mon_\""+ ctx.stateFrm().getText()+ "\"");
+		System.out.println("proc Mon_\"" + ctx.getText() + "\" = sum " + ctx.varsDeclList().getText()+". Mon_\""+ ctx.stateFrm().getText()+ "\";");
+		
 		return visitChildren(ctx);
 	}
 
@@ -309,6 +378,25 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
 	@Override public String visitDataExprList(@NotNull mucalculusParser.DataExprListContext ctx) { return visitChildren(ctx); }
 
-	
+	@Override public String visitVarsDeclList(@NotNull mucalculusParser.VarsDeclListContext ctx) { 
+		
+		return visitChildren(ctx); 
+		
+	}
+
+	@Override public String visitVarsDecl(@NotNull mucalculusParser.VarsDeclContext ctx) {
+		IdListContext idListContext = ctx.idList();
+		List<TerminalNode> idList = idListContext.ID();
+		for(TerminalNode id:idList){
+			if(!varDeclarations.containsKey(id.getText())){
+				varDeclarations.put(id.getText(), ctx.sortExpr().getText());
+			}
+		}
+		
+//		ctx.idList();
+//		ctx.sortExpr();
+		return visitChildren(ctx); 
+	}
+
 	}
 

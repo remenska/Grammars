@@ -3,7 +3,50 @@ grammar mucalculus;
 start : stateFrm ;
 
 
+fixedPointOperator
+  : 'mu'                       # MuOperator                                  // Minimal fixed point operator
+  | 'nu'                       # NuOperator                                  // Maximal fixed point operator
+  ;
+  
+
 dataValExpr: 'val' '(' myDataExpr=dataExpr ')';                             // Marked data expression
+
+//--- Regular formulas
+// note: all included in the restricted grammar
+regFrm:
+  '(' regFrm ')'                               # BracketsRegForm           // Brackets
+  | actFrm                                     # ActionFormulaRegForm             // Action formula
+  | 'nil'           				# NilRegForm 
+  | regFrm '*'                                # IterationRegForm       // Iteration
+  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration  
+  | regFrm mySeqSign='.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
+  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
+  ;
+
+//--- State formulas
+varsDeclList: varsDecl ( ',' varsDecl )* ;                       // Individually typed variables
+varsDecl: idList ':' sortExpr ;                                  // Typed variables
+
+stateFrm: 
+  dataValExpr            		  	# DataValueExpressionStateFrm      // Data expression // note: included in restricted grammar
+  | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets // note: included in restricted grammar
+  | 'true'                                    		# TrueStateFrm                             // True // note: included in restricted grammar
+  | 'false'    			    	 		# FalseStateFrm    // False // note: included in restricted grammar
+  | '!' stateFrm                   			# NegationStateFrm            // Negation
+  | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality // note: included in restricted grammar
+  | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
+  | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction // note: included in restricted grammar
+  | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction
+  | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
+  | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable
+  | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay
+  | 'yaled' ( '@' dataExpr )?         		 	# YaledOpStateFrm                         // Yaled
+  | 'exists' varsDeclList '.' stateFrm  	   	# ExistentialQuantifierStateFrm       // Existential quantification// False
+  | 'forall' varsDeclList '.' stateFrm  	  	# UniversalQuantifierStateFrm      // Universal quantification // note: included in restricted grammar
+  | 'mu' stateVarDecl '.' stateFrm     	    	# MuStateFrm    // Minimal fixed point
+  | 'nu' stateVarDecl '.' stateFrm       	  	# NuStateFrm      // Maximal fixed point
+  ;
+
 
 //--- Action formulas
  
@@ -14,45 +57,12 @@ actFrm:
   | 'true'                            		   # TrueActionFrm                        // True // note: included in restricted grammar
   | 'false'                           		   # FalseActionFrm                         // False // note: included in restricted grammar
   | '!' actFrm                       		   # NegationActionFrm            // Negation // note: included in restricted grammar
-  | 'forall' varsDeclList '.' actFrm  		   # UniversalQuantifierActionFrm             // Universal quantifier  // note: included in restricted grammar
-  | 'exists' varsDeclList '.' actFrm 		   # ExistentialQuantifierActionFrm             // Existential quantifier // note: included in restricted grammar
   | actFrm '@' dataExpr             		   # AtOperatorActionFrm      // At operator
   | actFrm '&&' actFrm               		   # IntersectionOfActions       // Intersection of actions // note: included in restricted grammar
   | actFrm '||' actFrm             		   # UnionOfActions       // Union actions // note: included in restricted grammar
   | actFrm '=>' actFrm            		   # Implication        // Implication
-  ;
-
-//--- Regular formulas
-// note: all included in the restricted grammar
-regFrm:
-  '(' regFrm ')'                               # BracketsRegForm           // Brackets //note: included in restricted grammar
-  | actFrm                                     # ActionFormulaRegForm             // Action formula //note: included in restricted grammar
-  | 'nil'           				# NilRegForm  //note: included in restricted grammar
-  | regFrm '*'                                # IterationRegForm       // Iteration //note: included in restricted grammar
-  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration   //note: included in restricted grammar
-  | regFrm '.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
-  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition //note: included in restricted grammar
-  ;
-
-//--- State formulas
-
-stateFrm: dataValExpr            		  	# DataValueExpressionStateFrm      // Data expression // note: included in restricted grammar
-  | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets // note: included in restricted grammar
-  | 'true'                                    		# TrueStateFrm                             // True // note: included in restricted grammar
-  | 'false'    			    	 		# FalseStateFrm    // False // note: included in restricted grammar
-  | 'forall' varsDeclList '.' stateFrm  	  	# UniversalQuantifierStateFrm      // Universal quantification // note: included in restricted grammar
-  | 'exists' varsDeclList '.' stateFrm  	   	# ExistentialQuantifierStateFrm       // Existential quantification// False
-  | '!' stateFrm                   			# NegationStateFrm            // Negation
-  | 'mu' stateVarDecl '.' stateFrm     	    	# MuStateFrm    // Minimal fixed point
-  | 'nu' stateVarDecl '.' stateFrm       	  	# NuStateFrm      // Maximal fixed point
-  | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction // note: included in restricted grammar
-  | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction
-  | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
-  | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality // note: included in restricted grammar
-  | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
-  | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable // note: included in restricted grammar
-  | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay
-  | 'yaled' ( '@' dataExpr )?         		 	# YaledOpStateFrm                         // Yaled
+  | 'forall' varsDeclList '.' actFrm  		   # UniversalQuantifierActionFrm             // Universal quantifier  // note: included in restricted grammar
+  | 'exists' varsDeclList '.' actFrm 		   # ExistentialQuantifierActionFrm             // Existential quantifier // note: included in restricted grammar
   ;
 
 stateVarDecl: ID ( '(' stateVarAssignmentList ')' )? ;           // PBES variable declaration
@@ -62,7 +72,6 @@ stateVarAssignment: ID ':' sortExpr '=' dataExpr ;               // Typed variab
 stateVarAssignmentList: stateVarAssignment ( ',' stateVarAssignment )* ;  // Typed variable list
 
 
-varsDeclList: varsDecl ( ',' varsDecl )* ;                       // Individually typed variables
 
 dataExprList: dataExpr ( ',' dataExpr )* ;                       // Data expression list
 
@@ -116,7 +125,6 @@ multAct: 'tau'                                                        // Tau, hi
   | actionList                                                   // Multi-action
   ;
 
-varsDecl: idList ':' sortExpr ;                                  // Typed variables
 
 bagEnumEltList: bagEnumElt ( ',' bagEnumElt )* ;                 // Elements in a finite bag
 
@@ -188,6 +196,24 @@ sortDecl: idList ';'                                                   // List o
 
 idsDecl: idList ':' sortExpr ;                                   // Typed parameters
 
+  
+//--- Action Rename Specifications
+
+// actionRenameSpec: (SortSpec | ConsSpec | MapSpec | EqnSpec | ActSpec | ActionRenameRuleSpec)+ ; // Action rename specification
+
+// ActionRenameRuleSpec: VarSpec? 'rename' ActionRenameRule+ ;      // Action rename rule section
+
+// ActionRenameRule: (dataExpr '->')? Action '=>' ActionRenameRuleRHS ';' ; // Conditional action renaming
+
+// ActionRenameRuleRHS
+//   : Action                                                       // Action
+//   | 'tau'                                                        // Tau, hidden action, empty multi-action
+//   | 'delta'                                                      // Delta, deadlock, inaction
+//   ;
+//   
+
+// id :  'aman';
+//
 ID  :   LETTER (LETTER | [0-9])* ; 
 fragment
 LETTER : [a-zA-Z_] ;

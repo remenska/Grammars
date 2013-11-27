@@ -1018,6 +1018,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitNuOperator(@NotNull mucalculusParser.NuOperatorContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterWhereClauseDataExpr(@NotNull mucalculusParser.WhereClauseDataExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1259,6 +1272,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitSetSort(@NotNull mucalculusParser.SetSortContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitMuOperator(@NotNull mucalculusParser.MuOperatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
