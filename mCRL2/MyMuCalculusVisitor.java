@@ -63,9 +63,30 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitActionFormulaRegForm(@NotNull mucalculusParser.ActionFormulaRegFormContext ctx) { 
+	// here you need to produce something like:
+		
+	//	%OK
+	//	proc Proc_alpha =  satisfy(p,not(or(action(p),action(r)))) -> p
+	//			  + satisfy(q,not(or(action(p),action(r)))) -> q
+	//			  + satisfy(r,not(or(action(p),action(r)))) -> r
+	//	;
+	// which means testing for all actions?!
+	// yes. Tim's guidelines: is a finite summation over all action names a ∈ Act of the mCRL2 process
+			  
 //	System.out.println("Visited actionFormulaRegForm: " + ctx.getText());
-	return visitChildren(ctx); 
+	// satisfy begins!!
+	String result = new String("" + visit(ctx.actFrm()) +""); // TODO: process to be generated 
+	String monProc = "Mon_\"" + ctx.getText() + "\"";
+	if(monitorProcesses.get(monProc)==null)
+		monitorProcesses.put(monProc, new Integer(counter++));
 
+//	System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
+	System.out.println("proc Mon_\"" + ctx.getText() + "\" = sum blabla. satisfy(theAction, " + result + ") -> theAction \";");
+
+//	System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
+//	System.out.println("Returning actionFormulaRegForm: " + result);
+
+	return result;
 	}
 
 
@@ -98,20 +119,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
     int i = t1.getTokenIndex();
 
-//    System.out.println("TOKEN start = " + t1.getText()+" end = " + t2.getText());
-// if TOKEN.end = * then do the rewrite
-    
-//    System.out.println("TOKEN INDEX = " + i);
-//    System.out.println("Tokens size = " + tokens.size());
-//    rewriter.replace(t1, "amaaan");
-    
-//    if(t2.getText().equals("*") && tokens.get(t2.getTokenIndex()+1).getText().equals(".")){
     if(tokens.get(t2.getTokenIndex()+1).getText().equals(".")){
     	// transformation
-//    	System.out.println(tokens.get(t2.getTokenIndex()+1).getText());
     		rewriter.delete(t2.getTokenIndex()+1);
     		rewriter.insertAfter(t2.getTokenIndex(), "][");
-//    	return visit(ctx.getParent());
     	//we're ready
     }
     	
@@ -130,19 +141,21 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitAction(@NotNull mucalculusParser.ActionContext ctx) {
+//		System.out.println("Visited action: " + ctx.getText());
 		// TODO: this needs to be modified in case of actions with dataExprList
 		String monProc = "Mon_\"" + ctx.getText() + "\"";
 //		System.out.println("data? " + ctx.dataExprList());
 		if(monitorProcesses.get(monProc)==null)
 			monitorProcesses.put(monProc, new Integer(counter++));
 //		System.out.println("proc Mon_" +monitorProcesses.get(monProc) +  " = act_" + ctx.ID().getText() + ";");
-		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.ID().getText() + ";");
+		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.getText() + ";");
 		
 		if(!actions.contains(ctx.getText()))
 			actions.add(ctx.getText());
 		
 //      return visitChildren(ctx); 
-		return new String(ctx.getText());
+//		System.out.println("Returning visitAction: " + ctx.getText() );
+		return new String("act_"+ctx.getText());
 
 }
 	@Override public String visitBoxModalityStateFrm(@NotNull mucalculusParser.BoxModalityStateFrmContext ctx) { 
@@ -182,7 +195,6 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 //        System.out.println(t1.getTokenIndex() + " : " + t2.getTokenIndex());
         rewriter.insertAfter(t2.getTokenIndex(), "(false"+ " + " + child1modified.getText() +"+" +")");
         rewriter.delete(t1.getTokenIndex(), t2.getTokenIndex());
-		  // now replace [child1*]child2 = ([nil]child2 && [child1+]child2)
 //		  
 //		  // build this: regForm+
 //		  mucalculusParser.RegFrmContext child1modified = (RegFrmContext) child1.getChild(0);
@@ -228,9 +240,12 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitIntersectionOfActions(@NotNull mucalculusParser.IntersectionOfActionsContext ctx) { 
-		System.out.println("Visited IntersectionOfActions: " + ctx.getText());
-		return visitChildren(ctx); 
-		
+//		System.out.println("Visited IntersectionOfActions: " + ctx.getText());
+		String result = new String("and(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+//		System.out.println("Returning IntersectionOfActions: " + result);
+//		ctx.actFrm();
+//		System.out.println("---->or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+		return result;		
 	}
 	
 	@Override public String visitDisjunctionDataExpr(@NotNull mucalculusParser.DisjunctionDataExprContext ctx) { 
@@ -238,7 +253,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsStateFrm(@NotNull mucalculusParser.BracketsStateFrmContext ctx) { 
-		
+//		System.out.println("Visited BracketsStateFrm?? " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.stateFrm().getText() + "\"";
@@ -257,7 +272,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsActionFrm(@NotNull mucalculusParser.BracketsActionFrmContext ctx) { 
-		
+//		System.out.println("Visited BracketsActionFrm: " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.actFrm().getText() + "\"";
@@ -266,50 +281,90 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
-	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.actFrm().getText() + "\";");
+//	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.actFrm().getText() + "\";");
+	 	
+//	 	System.out.println("Returning BracketsActionFrm: " + ctx.getText());
+	 	String result = new String("" + visit(ctx.actFrm())+"");
+		return result; 
+		
+	}
+
+	@Override public String visitActionList(@NotNull mucalculusParser.ActionListContext ctx) {
+//		System.out.println("Visited ActionList: " + ctx.getText());
+//		System.out.println("Returning ActionList:" + ctx.getText());
 		return visitChildren(ctx); 
 		
 	}
 
+	
 	@Override public String visitMultiAction(@NotNull mucalculusParser.MultiActionContext ctx) { 
+//		System.out.println("Visited MultiAction: " + ctx.getText());
+//		System.out.println("Returning MultiAction" + ctx.getText());
 		return visitChildren(ctx); 
 	
 	}
 
 	@Override public String visitTrueActionFrm(@NotNull mucalculusParser.TrueActionFrmContext ctx) { 
-		return visitChildren(ctx); 
-		
+//		System.out.println("Visited TrueActionFrm: " + ctx.getText());
+		// TODO: Nope, I need a full process with sum, like this:
+//		proc Proc_true = satisfy(p,True) -> p + 
+//				  satisfy(q,True) -> q + 
+//				  satisfy(r,True) -> r
+//				  
+		String result = new String("True)");
+//		System.out.println("Returning visitTrueActionFrm:" + result);
+		return result;		
 	}
 
 	
 	@Override public String visitFalseActionFrm(@NotNull mucalculusParser.FalseActionFrmContext ctx) { 
-		return visitChildren(ctx); 
+//		System.out.println("Visited falseActionFrm: " + ctx.getText());
+		String result = new String("False)");
+		return result;		
 		
 	}
 
 	@Override public String visitNegationActionFrm(@NotNull mucalculusParser.NegationActionFrmContext ctx) { 
-		System.out.println("Visited negationActionFormula: " + ctx.actFrm().getText());
-//		System.out.println("not(" + visit(ctx.actFrm()) + ")");
-		return new String("not(" + visit(ctx.actFrm()) +")"); 
+//		System.out.println("Visited negationActionFormula: " + ctx.getText());
+		String result = new String("not(" + visit(ctx.actFrm()) + ")");
+//		System.out.println("Returning negationActionFormula:" + result);
+		return result;
 		
 	}
 
-	@Override public String visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
+	@Override public String visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { 
+//		System.out.println("Visited UniversalQuantifierActionFrm: " + ctx.getText());
+		String result = new String("Forall(" + visit(ctx.actFrm()) + ")");
+//		System.out.println("Returning UniversalQuantifierActionFrm:" + result);
+//		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
+		return result;
+		
+	}
 
-	@Override public String visitExistentialQuantifierActionFrm(@NotNull mucalculusParser.ExistentialQuantifierActionFrmContext ctx) { return visitChildren(ctx); }
+	@Override public String visitExistentialQuantifierActionFrm(@NotNull mucalculusParser.ExistentialQuantifierActionFrmContext ctx) { 
+		
+//		System.out.println("Visited ExistentialQuantifierActionFrm: " + ctx.getText());
+		String result = new String("Exists(" + visit(ctx.actFrm()) + ")");
+//		System.out.println("Returning ExistentialQuantifierActionFrm:" + result);
+//		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
+		return result;
+		
+	}
 
 	@Override public String visitUnionOfActions(@NotNull mucalculusParser.UnionOfActionsContext ctx) { 
-		
-		System.out.println("Visited unionOfActions: " + ctx.getText());
+//		System.out.println("Visited unionOfActions: " + ctx.getText());
+		String result = new String("or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+//		System.out.println("Returning unionOfActions: " + result);
 //		ctx.actFrm();
-//		System.out.println("or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
-		return new String("or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+//		System.out.println("---->or(" + visit(ctx.actFrm(0)) +" , "+ visit(ctx.actFrm(1)) + ")");
+		return result;
 
 //		return visitChildren(ctx); 
 		
 	}
 
 	@Override public String visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { 
+//		System.out.println("Visited BracketsRegForm: " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.regFrm().getText() + "\"";
@@ -318,7 +373,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
-	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm().getText() + "\";");
+//	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm().getText() + "\";");
 		return visitChildren(ctx); 
 	}
 

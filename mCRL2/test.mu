@@ -1,1 +1,1 @@
-forall x,y:Nat.[(a)*.P(x).(S || Q || G)*.!(R || !T || F)]false
+[A.!(B || C(5)) && (E||F)]false

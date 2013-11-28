@@ -21,7 +21,8 @@ import org.apache.commons.io.IOUtils;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		InputStream is = new FileInputStream("/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu");
-		
+		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
+		//full mCRL2 grammar
 		String initialString = IOUtils.toString(is);
 //		String theString = writer.toString();
 		String finalString = initialString;
@@ -30,39 +31,41 @@ public class Main {
 		
 //		mucalculusLexer lexer = new mucalculusLexer(
 //				(finalString.toCharArray());
-		String[] aman = finalString.split("\\.");
-		for(String token:aman)
-				System.out.print(token + ", ");
-		System.out.println();
-//		System.out.println("Modified formula: " + finalString);		
+//		String[] aman = finalString.split("\\.");
+//		for(String token:aman)
+//				System.out.print(token + ", ");
+//		System.out.println();
+		System.out.println("Original formula : " + finalString);		
 		mucalculusLexer lexer = new mucalculusLexer((CharStream) new ANTLRInputStream(finalString));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		mucalculusParser parser = new mucalculusParser(tokens);
 		ParseTree tree = parser.start();
 //        System.out.println(parser.getState());
 
-		MyMuCalculusVisitor visitor = new MyMuCalculusVisitor(tokens);
+		MyMuCalculusVisitorSilent visitor = new MyMuCalculusVisitorSilent(tokens);
 		visitor.visit(tree);
 
-		finalString = preprocess(MyMuCalculusVisitor.rewriter.getText());
+		finalString = preprocess(MyMuCalculusVisitorSilent.rewriter.getText());
 		
-        System.out.println("JOVO NA NOVO : "+ finalString);
+//        System.out.println("JOVO NA NOVO : "+ finalString);
         lexer = new mucalculusLexer((CharStream) new ANTLRInputStream(finalString));
         tokens = new CommonTokenStream(lexer);
         parser = new mucalculusParser(tokens);
         tree = parser.start();
-        visitor = new MyMuCalculusVisitor(tokens);
+        visitor = new MyMuCalculusVisitorSilent(tokens);
 		visitor.visit(tree);
 		
-		finalString = preprocess(MyMuCalculusVisitor.rewriter.getText());
-		
-        System.out.println("JOVO NA NOVO : "+ finalString);
+		finalString = preprocess(MyMuCalculusVisitorSilent.rewriter.getText());
+		System.out.println("----------------------------------------");
+        System.out.println("Modified formula : "+ finalString);
+		System.out.println("----------------------------------------");
         lexer = new mucalculusLexer((CharStream) new ANTLRInputStream(finalString));
         tokens = new CommonTokenStream(lexer);
         parser = new mucalculusParser(tokens);
         tree = parser.start();
-        visitor = new MyMuCalculusVisitor(tokens);
-		visitor.visit(tree);
+        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens);
+		visitor1.visit(tree);
+
 		System.out.println(MyMuCalculusVisitor.actions);
 		System.out.println(MyMuCalculusVisitor.varDeclarations);
 //        for(int i=0;i<MyMuCalculusVisitor.rewriter.getTokenStream().size();i++)
