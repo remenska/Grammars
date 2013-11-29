@@ -1,1 +1,1 @@
-[A.!(B || C(5)) && (E||F)]false
+[exists d:Nat.action1(d)]false

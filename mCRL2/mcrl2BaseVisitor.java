@@ -98,6 +98,14 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitMapmCRL2SpecElt(@NotNull mcrl2Parser.MapmCRL2SpecEltContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -1138,7 +1146,7 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -1146,7 +1154,7 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -1195,6 +1203,14 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitRenExpr(@NotNull mcrl2Parser.RenExprContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -1314,14 +1330,6 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public T visitHashArgs(@NotNull mcrl2Parser.HashArgsContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -1330,7 +1338,7 @@ public class mcrl2BaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitSortExpr(@NotNull mcrl2Parser.SortExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

@@ -35,8 +35,8 @@ simpleSortExpr
   ;
 
 sortExpr
-  : simpleSortExpr
-  | hashArgs '->' sortExpr ;                                     // Function sort
+  : simpleSortExpr # SortExprSimpleSortExpr
+  | hashArgs '->' sortExpr # FunctionSort;                                     // Function sort
 
 sortExprList: (sortExpr '#')* sortExpr ;                         // Product sort
 

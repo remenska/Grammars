@@ -147,6 +147,19 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
+	@Override public void enterFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
 	@Override public void enterMapmCRL2SpecElt(@NotNull mcrl2Parser.MapmCRL2SpecEltContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1837,19 +1850,6 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1857,6 +1857,19 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1935,6 +1948,19 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitRenExpr(@NotNull mcrl2Parser.RenExprContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2123,19 +2149,6 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterHashArgs(@NotNull mcrl2Parser.HashArgsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2149,13 +2162,13 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterSortExpr(@NotNull mcrl2Parser.SortExprContext ctx) { }
+	@Override public void enterStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void exitSortExpr(@NotNull mcrl2Parser.SortExprContext ctx) { }
+	@Override public void exitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

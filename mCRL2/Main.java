@@ -4,6 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 //import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.ANTLRStringStream;
@@ -20,6 +24,26 @@ import org.apache.commons.io.IOUtils;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		
+		// First thing's first
+		InputStream ismcrl2 = new FileInputStream("/home/daniela/Documents/mCRL2_new_models/June2013/ForallExample.mcrl2");
+		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
+		//full mCRL2 grammar
+		String initialStringmcrl2 = IOUtils.toString(ismcrl2);	
+		mcrl2Lexer lexermcrl2 = new mcrl2Lexer((CharStream) new ANTLRInputStream(initialStringmcrl2));
+		CommonTokenStream tokensmcrl2 = new CommonTokenStream(lexermcrl2);
+		mcrl2Parser parsermcrl2 = new mcrl2Parser(tokensmcrl2);
+		ParseTree treemcrl2 =  parsermcrl2.start();
+		
+//        System.out.println(parser.getState());
+		// we're using this visitor just to collect action && argument types
+		Mymcrl2Visitor visitormcrl2 = new Mymcrl2Visitor(tokensmcrl2);
+		visitormcrl2.visit(treemcrl2);
+		System.out.println("AND FINALLY: " + visitormcrl2.actionsDict);
+		createActionSort(visitormcrl2);
+		createActionFormulaSort();
+		// end first thing's first
+		
 		InputStream is = new FileInputStream("/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu");
 		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
 		//full mCRL2 grammar
@@ -63,7 +87,7 @@ public class Main {
         tokens = new CommonTokenStream(lexer);
         parser = new mucalculusParser(tokens);
         tree = parser.start();
-        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens);
+        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict);
 		visitor1.visit(tree);
 
 		System.out.println(MyMuCalculusVisitor.actions);
@@ -110,5 +134,52 @@ public class Main {
 		buffer = new StringBuffer(buffer.toString().replaceAll("false", "false "));		
 
 		return buffer.toString();
+	}
+	
+	public static String createActionSort(Mymcrl2Visitor visitor){
+		StringBuffer result = new StringBuffer();
+		result.append("sort Action = struct ");
+		Hashtable<String, ArrayList<String>> actionsDict = visitor.actionsDict;
+		Enumeration<String> keys = actionsDict.keys();
+		while(keys.hasMoreElements()){
+			String key = keys.nextElement();
+			ArrayList<String> dataTypes = actionsDict.get(key);
+			result.append(key);
+			if(dataTypes.size()>0){
+				result.append("(");
+				int counter = 1;
+				Iterator<String> iter = dataTypes.iterator();
+				while(iter.hasNext()){
+					String dt = iter.next();
+					result.append("arg"+counter++ + ":" + dt);
+
+					if(iter.hasNext())
+						result.append(",");
+				}
+				result.append(")");
+			}
+			
+			if(keys.hasMoreElements()){
+				result.append("\n | ");
+			} 
+		}
+		result.append(";\n");
+
+		System.out.println(result.toString());
+		return result.toString();
+	}
+	
+	public static String createActionFormulaSort(){
+		String result = new String("\nsort ActionFormula = struct action(act1:Action)\n" + 
+					"| and(phi1:ActionFormula,phi2:ActionFormula) \n" + 
+					"| or(phi1:ActionFormula,phi2:ActionFormula)  \n" + 
+					"| not(ActionFormula) \n" + 
+					"| Forall(ActionFormula) \n" + 
+					"| Exists(ActionFormula) \n" +
+					     "| True \n" +
+					     "| False ; \n\n");	
+		
+		System.out.println(result);
+		return result;
 	}
 }

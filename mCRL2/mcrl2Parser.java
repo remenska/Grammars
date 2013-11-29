@@ -803,30 +803,54 @@ public class mcrl2Parser extends Parser {
 	}
 
 	public static class SortExprContext extends ParserRuleContext {
+		public SortExprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_sortExpr; }
+	 
+		public SortExprContext() { }
+		public void copyFrom(SortExprContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class SortExprSimpleSortExprContext extends SortExprContext {
 		public SimpleSortExprContext simpleSortExpr() {
 			return getRuleContext(SimpleSortExprContext.class,0);
 		}
+		public SortExprSimpleSortExprContext(SortExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).enterSortExprSimpleSortExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).exitSortExprSimpleSortExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mcrl2Visitor ) return ((mcrl2Visitor<? extends T>)visitor).visitSortExprSimpleSortExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class FunctionSortContext extends SortExprContext {
 		public HashArgsContext hashArgs() {
 			return getRuleContext(HashArgsContext.class,0);
 		}
 		public SortExprContext sortExpr() {
 			return getRuleContext(SortExprContext.class,0);
 		}
-		public SortExprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_sortExpr; }
+		public FunctionSortContext(SortExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).enterSortExpr(this);
+			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).enterFunctionSort(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).exitSortExpr(this);
+			if ( listener instanceof mcrl2Listener ) ((mcrl2Listener)listener).exitFunctionSort(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mcrl2Visitor ) return ((mcrl2Visitor<? extends T>)visitor).visitSortExpr(this);
+			if ( visitor instanceof mcrl2Visitor ) return ((mcrl2Visitor<? extends T>)visitor).visitFunctionSort(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -838,6 +862,7 @@ public class mcrl2Parser extends Parser {
 			setState(224);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
+				_localctx = new SortExprSimpleSortExprContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(219); simpleSortExpr();
@@ -845,6 +870,7 @@ public class mcrl2Parser extends Parser {
 				break;
 
 			case 2:
+				_localctx = new FunctionSortContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(220); hashArgs();

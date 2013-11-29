@@ -119,6 +119,17 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitIdList(@NotNull mcrl2Parser.IdListContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link mcrl2Parser#FunctionSort}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mcrl2Parser#FunctionSort}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#MapmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 */
@@ -1549,17 +1560,6 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitAssignmentList(@NotNull mcrl2Parser.AssignmentListContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#renExprList}.
 	 * @param ctx the parse tree
 	 */
@@ -1569,6 +1569,17 @@ public interface mcrl2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#BagEnumerationDataExpr}.
@@ -1635,6 +1646,17 @@ public interface mcrl2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRenExpr(@NotNull mcrl2Parser.RenExprContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mcrl2Parser#SortExprSimpleSortExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mcrl2Parser#SortExprSimpleSortExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#commExprList}.
@@ -1791,17 +1813,6 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitPropVarDecl(@NotNull mcrl2Parser.PropVarDeclContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mcrl2Parser#StructuredSort}.
-	 * @param ctx the parse tree
-	 */
-	void enterStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mcrl2Parser#StructuredSort}.
-	 * @param ctx the parse tree
-	 */
-	void exitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#hashArgs}.
 	 * @param ctx the parse tree
 	 */
@@ -1813,15 +1824,15 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitHashArgs(@NotNull mcrl2Parser.HashArgsContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mcrl2Parser#sortExpr}.
+	 * Enter a parse tree produced by {@link mcrl2Parser#StructuredSort}.
 	 * @param ctx the parse tree
 	 */
-	void enterSortExpr(@NotNull mcrl2Parser.SortExprContext ctx);
+	void enterStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link mcrl2Parser#sortExpr}.
+	 * Exit a parse tree produced by {@link mcrl2Parser#StructuredSort}.
 	 * @param ctx the parse tree
 	 */
-	void exitSortExpr(@NotNull mcrl2Parser.SortExprContext ctx);
+	void exitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#dataExprList}.

@@ -1,7 +1,10 @@
 package info.remenska.PASS.monitor.mCRL2;
 
 // Generated from mucalculus.g4 by ANTLR 4.1
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,8 +30,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
     public static TokenStreamRewriter rewriter;
     public static LinkedList<String> actions = new LinkedList<String>();
     public static Hashtable<String,String> varDeclarations = new Hashtable<String,String>();
-	public MyMuCalculusVisitor(BufferedTokenStream tokens) {
+    public static Hashtable<String, ArrayList<String>> actionsDict;
+	public MyMuCalculusVisitor(BufferedTokenStream tokens, Hashtable<String, ArrayList<String>> actionsDict) {
 		this.tokens = tokens;
+		this.actionsDict = actionsDict;
 		rewriter = new TokenStreamRewriter(tokens);
 	}
 	
@@ -75,16 +80,60 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			  
 //	System.out.println("Visited actionFormulaRegForm: " + ctx.getText());
 	// satisfy begins!!
-	String result = new String("" + visit(ctx.actFrm()) +""); // TODO: process to be generated 
+	String result = new String("" + visit(ctx.actFrm()) +""); 
 	String monProc = "Mon_\"" + ctx.getText() + "\"";
 	if(monitorProcesses.get(monProc)==null)
 		monitorProcesses.put(monProc, new Integer(counter++));
+	
+	StringBuffer sumOverAllActions = new StringBuffer();
+	
+	Enumeration<String> keys = actionsDict.keys();
+	StringBuffer modifiedKey = new StringBuffer();
+	while(keys.hasMoreElements()){
+		StringBuffer sumOverDataTypes = new StringBuffer();
+		String key = keys.nextElement();
+		modifiedKey = new StringBuffer(key);
+		ArrayList<String> dataTypes = actionsDict.get(key);
+		if(dataTypes.size()>0){
+			modifiedKey.append("(");
+			sumOverDataTypes = new StringBuffer("sum ");
+
+			int counter = 1;
+			Iterator<String> iter = dataTypes.iterator();
+			while(iter.hasNext()){
+				String dt = iter.next();
+				sumOverDataTypes.append("arg"+counter++ + ":" + dt );
+				modifiedKey.append("arg"+(counter-1));
+				if(iter.hasNext()){
+					sumOverDataTypes.append(",");
+					modifiedKey.append(",");
+				}
+				else {
+					sumOverDataTypes.append(".");
+					modifiedKey.append(")");
+				}
+			}
+		}
+		
+		sumOverDataTypes= new StringBuffer(sumOverDataTypes + "satisfy(" + modifiedKey + ", " + result + ") -> " + key +"\n");
+		sumOverAllActions.append(sumOverDataTypes);
+
+		if(keys.hasMoreElements())
+			sumOverAllActions.append(" + ");
+//		 else
+//			sumOverAllActions.append(";\n\n");
+	}
+	//TODO: fuck I need to surround it with "action("
+	//example
+//	%     
+//	% proc Proc_alpha =  satisfy(p,not(or(action(p),action(r)))) -> p
+//	% 		  + satisfy(q,not(or(action(p),action(r)))) -> q
+//	% 		  + satisfy(r,not(or(action(p),action(r)))) -> r
+//	% ;    
+//	% 	  satisfy(r,True) -> r
 
 //	System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
-	System.out.println("proc Mon_\"" + ctx.getText() + "\" = sum blabla. satisfy(theAction, " + result + ") -> theAction \";");
-
-//	System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
-//	System.out.println("Returning actionFormulaRegForm: " + result);
+	System.out.println("proc Mon_\"" + ctx.getText() + "\" = "+sumOverAllActions +";");
 
 	return result;
 	}
@@ -148,6 +197,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc)==null)
 			monitorProcesses.put(monProc, new Integer(counter++));
 //		System.out.println("proc Mon_" +monitorProcesses.get(monProc) +  " = act_" + ctx.ID().getText() + ";");
+		// now here, if there is an argument, the process should carry it? or get rid of this
 		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.getText() + ";");
 		
 		if(!actions.contains(ctx.getText()))
@@ -333,7 +383,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { 
-//		System.out.println("Visited UniversalQuantifierActionFrm: " + ctx.getText());
+		System.out.println("Visited UniversalQuantifierActionFrm: " + ctx.getText());
 		String result = new String("Forall(" + visit(ctx.actFrm()) + ")");
 //		System.out.println("Returning UniversalQuantifierActionFrm:" + result);
 //		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
@@ -343,7 +393,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
 	@Override public String visitExistentialQuantifierActionFrm(@NotNull mucalculusParser.ExistentialQuantifierActionFrmContext ctx) { 
 		
-//		System.out.println("Visited ExistentialQuantifierActionFrm: " + ctx.getText());
+		System.out.println("Visited ExistentialQuantifierActionFrm: " + ctx.getText());
 		String result = new String("Exists(" + visit(ctx.actFrm()) + ")");
 //		System.out.println("Returning ExistentialQuantifierActionFrm:" + result);
 //		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
@@ -410,7 +460,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	@Override
 	public String visitUniversalQuantifierStateFrm(
 			@NotNull mucalculusParser.UniversalQuantifierStateFrmContext ctx) {
-//		System.out.println("Visited UniversalQuantifierStateFrm: " + ctx.getText()+" = " + ctx.varsDeclList().getText() + "  " + ctx.stateFrm().getText());
+		System.out.println("Visited UniversalQuantifierStateFrm: " + ctx.getText()+" = " + ctx.varsDeclList().getText() + "  " + ctx.stateFrm().getText());
 		String monProc, monProc1, monProc2;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc2 = "Mon_\"" + ctx.stateFrm().getText() + "\"";

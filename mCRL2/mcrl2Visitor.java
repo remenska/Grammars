@@ -82,6 +82,13 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitIdList(@NotNull mcrl2Parser.IdListContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link mcrl2Parser#FunctionSort}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSort(@NotNull mcrl2Parser.FunctionSortContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#MapmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -992,18 +999,18 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitAssignmentList(@NotNull mcrl2Parser.AssignmentListContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#renExprList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitRenExprList(@NotNull mcrl2Parser.RenExprListContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mcrl2Parser#ListEnumerationDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListEnumerationDataExpr(@NotNull mcrl2Parser.ListEnumerationDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#BagEnumerationDataExpr}.
@@ -1046,6 +1053,13 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRenExpr(@NotNull mcrl2Parser.RenExprContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mcrl2Parser#SortExprSimpleSortExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSortExprSimpleSortExpr(@NotNull mcrl2Parser.SortExprSimpleSortExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#commExprList}.
@@ -1146,13 +1160,6 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitPropVarDecl(@NotNull mcrl2Parser.PropVarDeclContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mcrl2Parser#StructuredSort}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#hashArgs}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1160,11 +1167,11 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitHashArgs(@NotNull mcrl2Parser.HashArgsContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mcrl2Parser#sortExpr}.
+	 * Visit a parse tree produced by {@link mcrl2Parser#StructuredSort}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSortExpr(@NotNull mcrl2Parser.SortExprContext ctx);
+	T visitStructuredSort(@NotNull mcrl2Parser.StructuredSortContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#dataExprList}.
