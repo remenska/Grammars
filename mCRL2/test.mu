@@ -1,1 +1,1 @@
-[exists d:Nat.action1(d)]false
+[forall d:Bool.(dd(b) || dd(false))]false

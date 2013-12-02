@@ -3,6 +3,7 @@ package info.remenska.PASS.monitor.mCRL2;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -30,6 +31,7 @@ public class Main {
 		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
 		//full mCRL2 grammar
 		String initialStringmcrl2 = IOUtils.toString(ismcrl2);	
+		try{ 
 		mcrl2Lexer lexermcrl2 = new mcrl2Lexer((CharStream) new ANTLRInputStream(initialStringmcrl2));
 		CommonTokenStream tokensmcrl2 = new CommonTokenStream(lexermcrl2);
 		mcrl2Parser parsermcrl2 = new mcrl2Parser(tokensmcrl2);
@@ -38,10 +40,18 @@ public class Main {
 //        System.out.println(parser.getState());
 		// we're using this visitor just to collect action && argument types
 		Mymcrl2Visitor visitormcrl2 = new Mymcrl2Visitor(tokensmcrl2);
+		
 		visitormcrl2.visit(treemcrl2);
 		System.out.println("AND FINALLY: " + visitormcrl2.actionsDict);
 		createActionSort(visitormcrl2);
 		createActionFormulaSort();
+		}
+		catch(java.lang.NullPointerException e){
+			System.out.println("mCRL2 model is not well formed.");
+			System.err.println("Exception stack trace=========");
+			e.printStackTrace(new PrintStream(System.err));
+			System.exit(1);
+		}
 		// end first thing's first
 		
 		InputStream is = new FileInputStream("/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu");
@@ -60,6 +70,7 @@ public class Main {
 //				System.out.print(token + ", ");
 //		System.out.println();
 		System.out.println("Original formula : " + finalString);		
+		try{ 
 		mucalculusLexer lexer = new mucalculusLexer((CharStream) new ANTLRInputStream(finalString));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		mucalculusParser parser = new mucalculusParser(tokens);
@@ -78,7 +89,6 @@ public class Main {
         tree = parser.start();
         visitor = new MyMuCalculusVisitorSilent(tokens);
 		visitor.visit(tree);
-		
 		finalString = preprocess(MyMuCalculusVisitorSilent.rewriter.getText());
 		System.out.println("----------------------------------------");
         System.out.println("Modified formula : "+ finalString);
@@ -89,7 +99,13 @@ public class Main {
         tree = parser.start();
         MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict);
 		visitor1.visit(tree);
-
+		} catch(java.lang.NullPointerException e){
+			System.out.println("Mu-calculus formula is not well formed. ");
+			System.err.println("Exception stack trace=========");
+			e.printStackTrace(new PrintStream(System.err));
+			System.exit(1);
+		}
+		
 		System.out.println(MyMuCalculusVisitor.actions);
 		System.out.println(MyMuCalculusVisitor.varDeclarations);
 //        for(int i=0;i<MyMuCalculusVisitor.rewriter.getTokenStream().size();i++)
@@ -138,6 +154,7 @@ public class Main {
 	
 	public static String createActionSort(Mymcrl2Visitor visitor){
 		StringBuffer result = new StringBuffer();
+		result.append("act error;\n");
 		result.append("sort Action = struct ");
 		Hashtable<String, ArrayList<String>> actionsDict = visitor.actionsDict;
 		Enumeration<String> keys = actionsDict.keys();
@@ -151,7 +168,7 @@ public class Main {
 				Iterator<String> iter = dataTypes.iterator();
 				while(iter.hasNext()){
 					String dt = iter.next();
-					result.append("arg"+counter++ + ":" + dt);
+					result.append(key+"_"+ "arg"+counter++ + ":" + dt);
 
 					if(iter.hasNext())
 						result.append(",");

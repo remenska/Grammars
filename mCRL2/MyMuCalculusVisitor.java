@@ -115,7 +115,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			}
 		}
 		
-		sumOverDataTypes= new StringBuffer(sumOverDataTypes + "satisfy(" + modifiedKey + ", " + result + ") -> " + key +"\n");
+		sumOverDataTypes= new StringBuffer(sumOverDataTypes + "satisfy(" + modifiedKey + ", " + result + ") -> " + modifiedKey +"\n");
 		sumOverAllActions.append(sumOverDataTypes);
 
 		if(keys.hasMoreElements())
@@ -192,20 +192,20 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	@Override public String visitAction(@NotNull mucalculusParser.ActionContext ctx) {
 //		System.out.println("Visited action: " + ctx.getText());
 		// TODO: this needs to be modified in case of actions with dataExprList
-		String monProc = "Mon_\"" + ctx.getText() + "\"";
+//		String monProc = "Mon_\"" + ctx.getText() + "\"";
 //		System.out.println("data? " + ctx.dataExprList());
-		if(monitorProcesses.get(monProc)==null)
-			monitorProcesses.put(monProc, new Integer(counter++));
+//		if(monitorProcesses.get(monProc)==null)
+//			monitorProcesses.put(monProc, new Integer(counter++));
 //		System.out.println("proc Mon_" +monitorProcesses.get(monProc) +  " = act_" + ctx.ID().getText() + ";");
 		// now here, if there is an argument, the process should carry it? or get rid of this
-		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.getText() + ";");
+//		System.out.println("proc Mon_\"" + ctx.getText() + "\" = act_" + ctx.getText() + ";");
 		
 		if(!actions.contains(ctx.getText()))
 			actions.add(ctx.getText());
 		
 //      return visitChildren(ctx); 
 //		System.out.println("Returning visitAction: " + ctx.getText() );
-		return new String("act_"+ctx.getText());
+		return new String("action("+ctx.getText()+")");
 
 }
 	@Override public String visitBoxModalityStateFrm(@NotNull mucalculusParser.BoxModalityStateFrmContext ctx) { 
@@ -303,7 +303,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsStateFrm(@NotNull mucalculusParser.BracketsStateFrmContext ctx) { 
-//		System.out.println("Visited BracketsStateFrm?? " + ctx.getText());
+		System.out.println("Visited BracketsStateFrm?? " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.stateFrm().getText() + "\"";
@@ -313,7 +313,8 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
 	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.stateFrm().getText() + "\";");
-		return visitChildren(ctx); 
+	 	String result = new String("" + visit(ctx.stateFrm())+"");
+	 	return result;
 	}
 	
 	@Override public String visitDataValueExpressionActionFrm(@NotNull mucalculusParser.DataValueExpressionActionFrmContext ctx) { 
@@ -322,7 +323,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsActionFrm(@NotNull mucalculusParser.BracketsActionFrmContext ctx) { 
-//		System.out.println("Visited BracketsActionFrm: " + ctx.getText());
+		System.out.println("Visited BracketsActionFrm: " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.actFrm().getText() + "\"";
@@ -356,12 +357,11 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
 	@Override public String visitTrueActionFrm(@NotNull mucalculusParser.TrueActionFrmContext ctx) { 
 //		System.out.println("Visited TrueActionFrm: " + ctx.getText());
-		// TODO: Nope, I need a full process with sum, like this:
 //		proc Proc_true = satisfy(p,True) -> p + 
 //				  satisfy(q,True) -> q + 
 //				  satisfy(r,True) -> r
 //				  
-		String result = new String("True)");
+		String result = new String("True");
 //		System.out.println("Returning visitTrueActionFrm:" + result);
 		return result;		
 	}
@@ -369,7 +369,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	
 	@Override public String visitFalseActionFrm(@NotNull mucalculusParser.FalseActionFrmContext ctx) { 
 //		System.out.println("Visited falseActionFrm: " + ctx.getText());
-		String result = new String("False)");
+		String result = new String("False");
 		return result;		
 		
 	}
@@ -385,6 +385,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	@Override public String visitUniversalQuantifierActionFrm(@NotNull mucalculusParser.UniversalQuantifierActionFrmContext ctx) { 
 		System.out.println("Visited UniversalQuantifierActionFrm: " + ctx.getText());
 		String result = new String("Forall(" + visit(ctx.actFrm()) + ")");
+		visit(ctx.varsDeclList());
 //		System.out.println("Returning UniversalQuantifierActionFrm:" + result);
 //		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
 		return result;
@@ -395,6 +396,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		
 		System.out.println("Visited ExistentialQuantifierActionFrm: " + ctx.getText());
 		String result = new String("Exists(" + visit(ctx.actFrm()) + ")");
+		visit(ctx.varsDeclList());
 //		System.out.println("Returning ExistentialQuantifierActionFrm:" + result);
 //		System.out.println("---> not(" + visit(ctx.actFrm()) + ")");
 		return result;
@@ -414,7 +416,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	}
 
 	@Override public String visitBracketsRegForm(@NotNull mucalculusParser.BracketsRegFormContext ctx) { 
-//		System.out.println("Visited BracketsRegForm: " + ctx.getText());
+		System.out.println("Visited BracketsRegForm: " + ctx.getText());
 		String monProc, monProc1;
 		monProc = "Mon_\"" + ctx.getText() + "\"";
 		monProc1 = "Mon_" + ctx.regFrm().getText() + "\"";
@@ -423,9 +425,9 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
-//	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm().getText() + "\";");
-		return visitChildren(ctx); 
-	}
+	 	System.out.println("proc Mon_\"" + ctx.getText() +"\" = " + "Mon_\"" + ctx.regFrm().getText() + "\";");
+	 	String result = new String("" + visit(ctx.regFrm())+"");
+		return result; 	}
 
 	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { return visitChildren(ctx); }
 

@@ -992,19 +992,6 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterActmCRL2SpecElt(@NotNull mcrl2Parser.ActmCRL2SpecEltContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1012,6 +999,19 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitActmCRL2SpecElt(@NotNull mcrl2Parser.ActmCRL2SpecEltContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1772,19 +1772,6 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterSortmCRL2SpecElt(@NotNull mcrl2Parser.SortmCRL2SpecEltContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1792,6 +1779,19 @@ public class mcrl2BaseListener implements mcrl2Listener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitSortmCRL2SpecElt(@NotNull mcrl2Parser.SortmCRL2SpecEltContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

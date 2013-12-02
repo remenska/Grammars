@@ -834,17 +834,6 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitDelayOpStateFrm(@NotNull mcrl2Parser.DelayOpStateFrmContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#ActmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 */
@@ -854,6 +843,17 @@ public interface mcrl2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitActmCRL2SpecElt(@NotNull mcrl2Parser.ActmCRL2SpecEltContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#ifThen}.
@@ -1494,17 +1494,6 @@ public interface mcrl2Listener extends ParseTreeListener {
 	void exitBesSpec(@NotNull mcrl2Parser.BesSpecContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link mcrl2Parser#IntegerSort}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link mcrl2Parser#IntegerSort}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#SortmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 */
@@ -1514,6 +1503,17 @@ public interface mcrl2Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSortmCRL2SpecElt(@NotNull mcrl2Parser.SortmCRL2SpecEltContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link mcrl2Parser#IntegerSort}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link mcrl2Parser#IntegerSort}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link mcrl2Parser#AdditionDataExpr}.

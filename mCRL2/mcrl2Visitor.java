@@ -537,18 +537,18 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitDelayOpStateFrm(@NotNull mcrl2Parser.DelayOpStateFrmContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#ActmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitActmCRL2SpecElt(@NotNull mcrl2Parser.ActmCRL2SpecEltContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mcrl2Parser#IdentifierDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifierDataExpr(@NotNull mcrl2Parser.IdentifierDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#ifThen}.
@@ -957,18 +957,18 @@ public interface mcrl2Visitor<T> extends ParseTreeVisitor<T> {
 	T visitBesSpec(@NotNull mcrl2Parser.BesSpecContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mcrl2Parser#IntegerSort}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#SortmCRL2SpecElt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSortmCRL2SpecElt(@NotNull mcrl2Parser.SortmCRL2SpecEltContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mcrl2Parser#IntegerSort}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntegerSort(@NotNull mcrl2Parser.IntegerSortContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mcrl2Parser#AdditionDataExpr}.
