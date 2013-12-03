@@ -191,8 +191,6 @@ public class Main {
 					"| and(phi1:ActionFormula,phi2:ActionFormula) \n" + 
 					"| or(phi1:ActionFormula,phi2:ActionFormula)  \n" + 
 					"| not(ActionFormula) \n" + 
-					"| Forall(ActionFormula) \n" + 
-					"| Exists(ActionFormula) \n" +
 					     "| True \n" +
 					     "| False ; \n\n");	
 		

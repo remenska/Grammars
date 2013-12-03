@@ -1,1 +1,1 @@
-[forall d:Bool.(dd(b) || dd(false))]false
+forall d:Nat,z:Bool.[action1(d)*]false
