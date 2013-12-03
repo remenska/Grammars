@@ -37,10 +37,12 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
     public static Hashtable<String, ArrayList<String>> actionsDict;
     public static String prepend_UniversalQuantifierStateFrm = new String();
     public static String varList = new String();
-	public MyMuCalculusVisitor(BufferedTokenStream tokens, Hashtable<String, ArrayList<String>> actionsDict) {
+    public static boolean humanReadable; 
+	public MyMuCalculusVisitor(BufferedTokenStream tokens, Hashtable<String, ArrayList<String>> actionsDict, boolean humanReadable) {
 		this.tokens = tokens;
 		this.actionsDict = actionsDict;
 		rewriter = new TokenStreamRewriter(tokens);
+		this.humanReadable = humanReadable;
 	}
 	
 	 Hashtable<String, Integer> monitorProcesses
@@ -53,9 +55,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			monitorProcesses.put(monProc, new Integer(counter++));
 		
 //		System.out.println("proc Monitor = " + "Mon_" + monitorProcesses.get(monProc) + ";");
-			
-		System.out.println("proc Monitor = " + monProc + ";");
-		
+		if(humanReadable)	
+			System.out.println("proc Monitor = " + monProc + ";");
+		else
+			System.out.println("proc Monitor = " + monitorProcesses.get(monProc));
 		return visitChildren(ctx); 
 	
 	}
@@ -139,8 +142,8 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 
 		if(keys.hasMoreElements())
 			sumOverAllActions.append(" + ");
-//		 else
-//			sumOverAllActions.append(";\n\n");
+		 else
+			sumOverAllActions.append(" + internal_mon;\n\n");
 	}
 	//example
 //	%     
@@ -151,8 +154,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 //	% 	  satisfy(r,True) -> r
 
 //	System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
-	System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = "+sumOverAllActions +";");
-
+	if(humanReadable)	
+		System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = "+sumOverAllActions +";");
+	else 
+		System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = "+sumOverAllActions +";");
 	return result;
 	}
 
@@ -165,8 +170,12 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 //		System.out.println("proc Mon_" +monitorProcesses.get(monProc) + " = Mon_" + monitorProcesses.get(monProc1) + ". Mon_" + monitorProcesses.get(monProc)+ ";");
-		System.out.println("proc " + monProc  + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + ". " + monProc + varList + ";");
-	return visitChildren(ctx); 
+		if(humanReadable)
+			System.out.println("proc " + monProc  + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + ". " + monProc + varList + ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc)  + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList + ". " + monitorProcesses.get(monProc) + varList + ";");
+
+		return visitChildren(ctx); 
 
 	}
 
@@ -200,8 +209,10 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	if(monitorProcesses.get(monProc2) == null)
 		monitorProcesses.put(monProc2, new Integer(counter++));
 // 	System.out.println("proc Mon_" + monitorProcesses.get(monProc)+ " = Mon_" + monitorProcesses.get(monProc1)+ " . " +  "Mon_"+ monitorProcesses.get(monProc2)+ ";");
-
- 	System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " +  monProc1 + varList + "." + monProc2+ varList  + ";");
+	if(humanReadable)
+		System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " +  monProc1 + varList + "." + monProc2+ varList  + ";");
+	else
+		System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " +  monitorProcesses.get(monProc1) + varList + "." + monitorProcesses.get(monProc2) + varList  + ";");
 
 	return visitChildren(ctx); 
 
@@ -239,51 +250,22 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		if(monitorProcesses.get(monProc2) == null)
 			monitorProcesses.put(monProc2, new Integer(counter++));
-		
-//		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_"  + monitorProcesses.get(monProc1)+ " . Mon_" + monitorProcesses.get(monProc2)  + ";" );
-		System.out.println("proc " + monProc  + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + " . " + monProc2+ varList  + ";" );
+		if(humanReadable)
+			System.out.println("proc " + monProc  + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + " . " + monProc2+ varList  + ";" );
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc)  + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList + " . " + monitorProcesses.get(monProc2) + varList  + ";" );
 
 	  if (ctx.regFrm() instanceof mucalculusParser.IterationRegFormContext) {
-//		  System.out.println("YESS"); //this means expansion is necessary
-//		  //[regForm*]stateForm = (stateForm && [regForm+]stateForm)
-//		  // build this (...)
-//		  BracketsStateFrmContext _localctx = new BracketsStateFrmContext(ctx);
-//		  // build this (... && ...)
-//		  ConjunctionStateFrmContext _localctx1 = new ConjunctionStateFrmContext(_localctx);
-//		  
+
 		  mucalculusParser.RegFrmContext child1 = ctx.regFrm();
 		  mucalculusParser.StateFrmContext child2 = ctx.stateFrm();
-//		  System.out.println("Child 1:" + child1.getText());
-//		  System.out.println("Child 2:" + child2.getText());
-		  
+
 		  mucalculusParser.RegFrmContext child1modified = (RegFrmContext) ctx.regFrm().getChild(0);
 		  Token t1 = (Token) child1.start;
 		  Token t2 = (Token) child1.stop;
-//        System.out.println("TOKEN " + t1.getText());
-//        System.out.println(rewriter.getText(new Interval(t1.getTokenIndex(), t2.getTokenIndex())));
-//        System.out.println(t1.getTokenIndex() + " : " + t2.getTokenIndex());
-        rewriter.insertAfter(t2.getTokenIndex(), "(false"+ " + " + child1modified.getText() +"+" +")");
+        rewriter.insertAfter(t2.getTokenIndex(), "(nil"+ " + " + child1modified.getText() +"+" +")");
         rewriter.delete(t1.getTokenIndex(), t2.getTokenIndex());
-//		  
-//		  // build this: regForm+
-//		  mucalculusParser.RegFrmContext child1modified = (RegFrmContext) child1.getChild(0);
-//		  NonEmptyIterationRegFormContext regPlusCtx = new NonEmptyIterationRegFormContext(child1modified);
-//		  regPlusCtx.addChild(child1modified);
-//		  
-//		  // build this: [regForm+]stateForm
-//		  BoxModalityStateFrmContext boxCtx = new BoxModalityStateFrmContext(_localctx1);
-//		  
-//		  boxCtx.addChild(regPlusCtx);
-//		  boxCtx.addChild(child2);
-//		  
-//		  // build this (stateForm && [regForm+]stateForm
-//		  _localctx1.addChild(child2);
-//		  _localctx1.addChild(boxCtx);
-//		  _localctx.addChild(_localctx1);
-//		  
-////		  _localctx.addChild(matchedToken)
-//		  return visit(_localctx);
-//		  
+
 	  }
 		  return visitChildren(ctx);
 
@@ -303,8 +285,11 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			monitorProcesses.put(monProc2, new Integer(counter++));
 		
 //		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1+ varList  + " + " + monProc2+ varList  + ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList  + " + " + monitorProcesses.get(monProc2) + varList  + ";");
 
-		System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1+ varList  + " + " + monProc2+ varList  + ";");
 		return visitChildren(ctx); 
 	}
 
@@ -331,8 +316,12 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
-	 	System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1+ varList  + ";");
-	 	String result = new String("" + visit(ctx.stateFrm())+"");
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1+ varList  + ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList  + ";");
+	 		
+		String result = new String("" + visit(ctx.stateFrm())+"");
 	 	return result;
 	}
 	
@@ -444,11 +433,28 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		if(monitorProcesses.get(monProc1)==null)
 			monitorProcesses.put(monProc1, new Integer(counter++));
 		
-	 	System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + ";");
-	 	String result = new String("" + visit(ctx.regFrm())+"");
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList + ";");
+	 	
+		String result = new String("" + visit(ctx.regFrm())+"");
 		return result; 	}
 
-	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { return visitChildren(ctx); }
+	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { 
+		String monProc;
+		monProc = "Mon_\"" + ctx.getText() + "\"";
+		if(monitorProcesses.get(monProc)==null)
+			monitorProcesses.put(monProc, new Integer(counter++));
+		
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + "internal_mon ;");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " + "internal_mon ;");
+
+		return visitChildren(ctx); 
+		
+	}
 
 	@Override public String visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { 
 		String monProc, monProc1, monProc2;
@@ -464,7 +470,11 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 		
 //		System.out.println("proc Mon_" + monitorProcesses.get(monProc) + " = " + "Mon_ " + monitorProcesses.get(monProc1) + " + " + "Mon_" + monitorProcesses.get(monProc2)+ ";");
 
-	 	System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + " + " + monProc2 + varList+ ";");
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm + " = " + monProc1 + varList + " + " + monProc2 + varList+ ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm + " = " + monitorProcesses.get(monProc1) + varList + " + " + monitorProcesses.get(monProc2) + varList+ ";");
+		
 		return visitChildren(ctx); 
 		
 	}
@@ -474,7 +484,15 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 	@Override
 	public String visitFalseStateFrm(
 			@NotNull mucalculusParser.FalseStateFrmContext ctx) {
-		System.out.println("proc Mon_\""+ ctx.getText()+ "\"" + prepend_UniversalQuantifierStateFrm  + " = error;");
+		String monProc;
+		monProc = "Mon_\"" + ctx.getText() + "\"";
+		if(monitorProcesses.get(monProc)==null)
+			monitorProcesses.put(monProc, new Integer(counter++));
+		if(humanReadable)
+			System.out.println("proc " + monProc + prepend_UniversalQuantifierStateFrm  + " = error;");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + prepend_UniversalQuantifierStateFrm  + " = error;");
+
 		return visitChildren(ctx);
 	}
 
@@ -500,7 +518,11 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
 			if(it.hasNext()) varList = varList + ",";
 		}
 		varList = varList + ")";
-		System.out.println("proc " + monProc + " = sum " + ctx.varsDeclList().getText()+". "+ monProc2 + varList + ";");
+		if(humanReadable)
+			System.out.println("proc " + monProc + " = sum " + ctx.varsDeclList().getText()+". "+ monProc2 + varList + ";");
+		else
+			System.out.println("proc " + monitorProcesses.get(monProc) + " = sum " + ctx.varsDeclList().getText()+". "+ monitorProcesses.get(monProc2) + varList + ";");
+		
 		// here get the list of variables
 		prepend_UniversalQuantifierStateFrm = "(" + prepend_UniversalQuantifierStateFrm + ctx.varsDeclList().getText()+")";
 		return visitChildren(ctx);

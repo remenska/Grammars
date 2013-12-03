@@ -193,7 +193,7 @@ public class MyMuCalculusVisitorSilent extends mucalculusBaseVisitor<String> {
 //        System.out.println("TOKEN " + t1.getText());
 //        System.out.println(rewriter.getText(new Interval(t1.getTokenIndex(), t2.getTokenIndex())));
 //        System.out.println(t1.getTokenIndex() + " : " + t2.getTokenIndex());
-        rewriter.insertAfter(t2.getTokenIndex(), "(false"+ " + " + child1modified.getText() +"+" +")");
+        rewriter.insertAfter(t2.getTokenIndex(), "(nil"+ " + " + child1modified.getText() +"+" +")");
         rewriter.delete(t1.getTokenIndex(), t2.getTokenIndex());
 //		  
 //		  // build this: regForm+
@@ -377,7 +377,10 @@ public class MyMuCalculusVisitorSilent extends mucalculusBaseVisitor<String> {
 		return visitChildren(ctx); 
 	}
 
-	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { return visitChildren(ctx); }
+	@Override public String visitNilRegForm(@NotNull mucalculusParser.NilRegFormContext ctx) { 
+		return visitChildren(ctx); 
+		
+	}
 
 	@Override public String visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { 
 		String monProc, monProc1, monProc2;

@@ -45,6 +45,7 @@ public class Main {
 		System.out.println("AND FINALLY: " + visitormcrl2.actionsDict);
 		createActionSort(visitormcrl2);
 		createActionFormulaSort();
+		createMappings(visitormcrl2);
 		}
 		catch(java.lang.NullPointerException e){
 			System.out.println("mCRL2 model is not well formed.");
@@ -97,7 +98,7 @@ public class Main {
         tokens = new CommonTokenStream(lexer);
         parser = new mucalculusParser(tokens);
         tree = parser.start();
-        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict);
+        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, false);
 		visitor1.visit(tree);
 		} catch(java.lang.NullPointerException e){
 			System.out.println("Mu-calculus formula is not well formed. ");
@@ -106,8 +107,8 @@ public class Main {
 			System.exit(1);
 		}
 		
-		System.out.println(MyMuCalculusVisitor.actions);
-		System.out.println(MyMuCalculusVisitor.varDeclarations);
+//		System.out.println(MyMuCalculusVisitor.actions);
+//		System.out.println(MyMuCalculusVisitor.varDeclarations);
 //        for(int i=0;i<MyMuCalculusVisitor.rewriter.getTokenStream().size();i++)
 //        System.out.println("tokens : "+ MyMuCalculusVisitor.rewriter.getTokenStream().get(i));
 
@@ -148,6 +149,7 @@ public class Main {
 		buffer = new StringBuffer(buffer.toString().replaceAll("sort", "sort "));		
 		buffer = new StringBuffer(buffer.toString().replaceAll("struct", "struct "));		
 		buffer = new StringBuffer(buffer.toString().replaceAll("false", "false "));		
+		buffer = new StringBuffer(buffer.toString().replaceAll("nil", "nil "));		
 
 		return buffer.toString();
 	}
@@ -185,6 +187,26 @@ public class Main {
 		System.out.println(result.toString());
 		return result.toString();
 	}
+	
+	public static String createMappings(Mymcrl2Visitor visitor){
+		StringBuffer result = new StringBuffer();
+		result.append("map satisfy: Action # ActionFormula -> Bool;\n");
+		result.append("var c1,c2:Action;\n");
+		result.append("f,g:ActionFormula;\n");
+		result.append("eqn\n");
+		result.append("satisfy(c1,action(c2)) = (c1 == c2) ;");
+		result.append("satisfy(c1,and(f,g)) = satisfy(c1,f) && satisfy(c1,g);\n");
+		result.append("satisfy(c1,not(f)) = !satisfy(c1,f);\n");
+		result.append("satisfy(c1,or(f,g)) = satisfy(c1,f) || satisfy(c1,g);\n");
+		result.append("satisfy(c1,True) = true;\n");
+		result.append("satisfy(c1,False) = false;\n");
+
+		result.append("\n");
+		
+		System.out.println(result.toString());
+		return result.toString();
+	}
+	
 	
 	public static String createActionFormulaSort(){
 		String result = new String("\nsort ActionFormula = struct action(act1:Action)\n" + 
