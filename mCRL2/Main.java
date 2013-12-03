@@ -25,9 +25,15 @@ import org.apache.commons.io.IOUtils;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
-		
+		if(args.length<2){
+			System.out.println("Usage: java info.remenska.PASS.monitor.mCRL2.Main <mCRL2ModelFile> <muCalculusFile> <humanReadable>");
+			System.out.println("\t\t<humanReadable> is optional boolean switch, and if set to true, \n\t\tyields to process names that are not parsable by mCRL2. ");
+			System.out.println("\t\tIt should be used this way only for inspecting the translation. Default value is false.");
+			System.exit(1);
+		}
 		// First thing's first
-		InputStream ismcrl2 = new FileInputStream("/home/daniela/Documents/mCRL2_new_models/June2013/ForallExample.mcrl2");
+		// "/home/daniela/Documents/mCRL2_new_models/June2013/ForallExample.mcrl2"
+		InputStream ismcrl2 = new FileInputStream(args[0]);
 		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
 		//full mCRL2 grammar
 		String initialStringmcrl2 = IOUtils.toString(ismcrl2);	
@@ -54,8 +60,8 @@ public class Main {
 			System.exit(1);
 		}
 		// end first thing's first
-		
-		InputStream is = new FileInputStream("/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu");
+		// "/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu"
+		InputStream is = new FileInputStream(args[1]);
 		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
 		//full mCRL2 grammar
 		String initialString = IOUtils.toString(is);
@@ -98,8 +104,14 @@ public class Main {
         tokens = new CommonTokenStream(lexer);
         parser = new mucalculusParser(tokens);
         tree = parser.start();
-        MyMuCalculusVisitor visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, false);
-		visitor1.visit(tree);
+        MyMuCalculusVisitor visitor1 = null;
+        if(args.length==3)
+          visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, Boolean.parseBoolean(args[2]));
+        else
+          visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, false);
+
+        visitor1.visit(tree);
+        
 		} catch(java.lang.NullPointerException e){
 			System.out.println("Mu-calculus formula is not well formed. ");
 			System.err.println("Exception stack trace=========");
@@ -156,7 +168,7 @@ public class Main {
 	
 	public static String createActionSort(Mymcrl2Visitor visitor){
 		StringBuffer result = new StringBuffer();
-		result.append("act error;\n");
+		result.append("act error, internal_mon;\n");
 		result.append("sort Action = struct ");
 		Hashtable<String, ArrayList<String>> actionsDict = visitor.actionsDict;
 		Enumeration<String> keys = actionsDict.keys();

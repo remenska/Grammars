@@ -37,7 +37,7 @@ public class MyMuCalculusVisitor extends mucalculusBaseVisitor<String> {
     public static Hashtable<String, ArrayList<String>> actionsDict;
     public static String prepend_UniversalQuantifierStateFrm = new String();
     public static String varList = new String();
-    public static boolean humanReadable; 
+    public boolean humanReadable = false; 
 	public MyMuCalculusVisitor(BufferedTokenStream tokens, Hashtable<String, ArrayList<String>> actionsDict, boolean humanReadable) {
 		this.tokens = tokens;
 		this.actionsDict = actionsDict;
