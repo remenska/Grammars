@@ -495,18 +495,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitVarsDeclList(@NotNull mucalculusParser.VarsDeclListContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#action}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAction(@NotNull mucalculusParser.ActionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#AlternativeCompositionRegForm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#projDecl}.
@@ -565,18 +565,18 @@ public interface mucalculusVisitor<T> extends ParseTreeVisitor<T> {
 	T visitWhereClauseDataExpr(@NotNull mucalculusParser.WhereClauseDataExprContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link mucalculusParser#ListSizeDataExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#stateVarAssignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStateVarAssignment(@NotNull mucalculusParser.StateVarAssignmentContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link mucalculusParser#ListSizeDataExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link mucalculusParser#TrueStateFrm}.

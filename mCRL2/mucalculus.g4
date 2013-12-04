@@ -3,8 +3,8 @@ grammar mucalculus;
 start : stateFrm ;
 
 
-fixedPointOperator
-  : 'mu'                       # MuOperator                                  // Minimal fixed point operator
+fixedPointOperator 
+  : 'mu'                       # MuOperator                                 // Minimal fixed point operator
   | 'nu'                       # NuOperator                                  // Maximal fixed point operator
   ;
   
@@ -13,30 +13,30 @@ dataValExpr: 'val' '(' myDataExpr=dataExpr ')';                             // M
 
 //--- Regular formulas
 // note: all included in the restricted grammar
-regFrm:
-  '(' regFrm ')'                               # BracketsRegForm           // Brackets
-  | actFrm                                     # ActionFormulaRegForm             // Action formula
-  | 'nil'           				# NilRegForm 
-  | regFrm '*'                                # IterationRegForm       // Iteration
-  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration  
-  | regFrm mySeqSign='.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace
-  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition
+regFrm: 
+  '(' regFrm ')'                               # BracketsRegForm           // Brackets // note: included in restricted grammar
+  | actFrm                                     # ActionFormulaRegForm             // Action formula // note: included in restricted grammar
+  | 'nil'           				# NilRegForm  // note: included in restricted grammar
+  | regFrm '*'                                # IterationRegForm       // Iteration // note: included in restricted grammar
+  | regFrm '+'                                # NonEmptyIterationRegForm       // Non-empty iteration   // note: included in restricted grammar
+  | regFrm mySeqSign='.' regFrm              	# SequentialCompositionRegForm 	// Sequential composition // note: here I want to do in-place token replace // note: included in restricted grammar
+  | regFrm '+' regFrm                        	# AlternativeCompositionRegForm 	// Alternative composition // note: included in restricted grammar
   ;
 
 //--- State formulas
 varsDeclList: varsDecl ( ',' varsDecl )* ;                       // Individually typed variables
 varsDecl: idList ':' sortExpr ;                                  // Typed variables
 
-stateFrm: 
+stateFrm:  
   dataValExpr            		  	# DataValueExpressionStateFrm      // Data expression // note: included in restricted grammar
   | '(' stateFrm ')'             		   	# BracketsStateFrm                      // Brackets // note: included in restricted grammar
   | 'true'                                    		# TrueStateFrm                             // True // note: included in restricted grammar
   | 'false'    			    	 		# FalseStateFrm    // False // note: included in restricted grammar
-  | '!' stateFrm                   			# NegationStateFrm            // Negation
+  | '!' stateFrm                   			# NegationStateFrm            // Negation // note: included in restricted grammar
   | '[' regFrm ']' stateFrm           		 	# BoxModalityStateFrm          // Box modality // note: included in restricted grammar
   | '<' regFrm '>' stateFrm           		 	# DiamondModalityStateFrm          // Diamond modality
   | stateFrm '&&' stateFrm             	 	# ConjunctionStateFrm    // Conjunction // note: included in restricted grammar
-  | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction
+  | stateFrm '||' stateFrm            		  	# DisjunctionStateFmr    // Disjunction 
   | stateFrm '=>' stateFrm            		 	# ImplicationStateFrm     // Implication   
   | ID ( '(' dataExprList ')' )?      		 	# PBESVariableStateFrm                          // Instantiated PBES variable
   | 'delay' ( '@' dataExpr )?         		 	# DelayOpStateFrm                          // Delay
@@ -53,7 +53,7 @@ stateFrm:
 actFrm: 
    dataValExpr                        	 	   # DataValueExpressionActionFrm    // note: included in restricted grammar
   | '(' actFrm ')'                    		   # BracketsActionFrm                // Brackets // note: included in restricted grammar
-  |  multAct                          		   # MultiAction                 // Multi-action
+  |  multAct                          		   # MultiAction                 // Multi-action // note: included in restricted grammar
   | '!' actFrm                       		   # NegationActionFrm            // Negation // note: included in restricted grammar
   | 'true'                            		   # TrueActionFrm                        // True // note: included in restricted grammar
   | 'false'                           		   # FalseActionFrm                         // False // note: included in restricted grammar

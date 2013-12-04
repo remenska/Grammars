@@ -27,12 +27,12 @@ public class mucalculusParser extends Parser {
 		ID=68, INT=69, WS=70, LINE_COMMENT=71;
 	public static final String[] tokenNames = {
 		"<INVALID>", "'eqn'", "'*'", "'['", "'<'", "'List'", "'false'", "'!='", 
-		"'<='", "'Bool'", "'nil'", "'cons'", "'}'", "'->'", "')'", "'Nat'", "'whr'", 
+		"'<='", "'nil'", "'Bool'", "'cons'", "'}'", "'->'", "')'", "'Nat'", "'whr'", 
 		"'Bag'", "'@'", "'Pos'", "'map'", "'='", "'div'", "'FSet'", "'Int'", "'yaled'", 
 		"'val'", "'mod'", "'|'", "'!'", "']'", "'lambda'", "'in'", "','", "'-'", 
 		"':'", "'('", "'var'", "'?'", "'{'", "'sort'", "'|>'", "'true'", "'++'", 
 		"'struct'", "'<|'", "'Set'", "'tau'", "'.'", "'=>'", "'+'", "'glob'", 
-		"'forall'", "';'", "'&&'", "'delay'", "'nu'", "'||'", "'>'", "'exists'", 
+		"'forall'", "';'", "'&&'", "'delay'", "'nu'", "'||'", "'exists'", "'>'", 
 		"'Real'", "'FBag'", "'=='", "'/'", "'>='", "'#'", "'end'", "'mu'", "ID", 
 		"INT", "WS", "LINE_COMMENT"
 	};
@@ -435,7 +435,7 @@ public class mucalculusParser extends Parser {
 				_localctx = new NilRegFormContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(95); match(10);
+				setState(95); match(9);
 				}
 				break;
 			}
@@ -1022,16 +1022,16 @@ public class mucalculusParser extends Parser {
 				_prevctx = _localctx;
 				setState(133); match(4);
 				setState(134); regFrm(0);
-				setState(135); match(58);
+				setState(135); match(59);
 				setState(136); stateFrm(11);
 				}
 				break;
-			case 59:
+			case 58:
 				{
 				_localctx = new ExistentialQuantifierStateFrmContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(138); match(59);
+				setState(138); match(58);
 				setState(139); varsDeclList();
 				setState(140); match(48);
 				setState(141); stateFrm(4);
@@ -1512,12 +1512,12 @@ public class mucalculusParser extends Parser {
 				setState(204); actFrm(2);
 				}
 				break;
-			case 59:
+			case 58:
 				{
 				_localctx = new ExistentialQuantifierActionFrmContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(206); match(59);
+				setState(206); match(58);
 				setState(207); varsDeclList();
 				setState(208); match(48);
 				setState(209); actFrm(1);
@@ -1930,28 +1930,6 @@ public class mucalculusParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class AdditionDataExprContext extends DataExprContext {
-		public List<DataExprContext> dataExpr() {
-			return getRuleContexts(DataExprContext.class);
-		}
-		public DataExprContext dataExpr(int i) {
-			return getRuleContext(DataExprContext.class,i);
-		}
-		public AdditionDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterAdditionDataExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAdditionDataExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAdditionDataExpr(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class LambdaDataExprContext extends DataExprContext {
 		public VarsDeclListContext varsDeclList() {
 			return getRuleContext(VarsDeclListContext.class,0);
@@ -1971,6 +1949,28 @@ public class mucalculusParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitLambdaDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class AdditionDataExprContext extends DataExprContext {
+		public List<DataExprContext> dataExpr() {
+			return getRuleContexts(DataExprContext.class);
+		}
+		public DataExprContext dataExpr(int i) {
+			return getRuleContext(DataExprContext.class,i);
+		}
+		public AdditionDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterAdditionDataExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitAdditionDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitAdditionDataExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2122,6 +2122,22 @@ public class mucalculusParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class EmptyBagDataExprContext extends DataExprContext {
+		public EmptyBagDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterEmptyBagDataExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEmptyBagDataExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEmptyBagDataExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class BagEnumerationDataExprContext extends DataExprContext {
 		public BagEnumEltListContext bagEnumEltList() {
 			return getRuleContext(BagEnumEltListContext.class,0);
@@ -2138,22 +2154,6 @@ public class mucalculusParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBagEnumerationDataExpr(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class EmptyBagDataExprContext extends DataExprContext {
-		public EmptyBagDataExprContext(DataExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterEmptyBagDataExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitEmptyBagDataExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitEmptyBagDataExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2789,7 +2789,7 @@ public class mucalculusParser extends Parser {
 				_localctx = new ExistentialQuantifierDataExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(279); match(59);
+				setState(279); match(58);
 				setState(280); varsDeclList();
 				setState(281); match(48);
 				setState(282); dataExpr(23);
@@ -3070,7 +3070,7 @@ public class mucalculusParser extends Parser {
 						pushNewRecursionContext(_localctx, _startState, RULE_dataExpr);
 						setState(357);
 						if (!(10 >= _localctx._p)) throw new FailedPredicateException(this, "10 >= $_p");
-						setState(358); match(58);
+						setState(358); match(59);
 						setState(359); dataExpr(11);
 						}
 						break;
@@ -3788,6 +3788,23 @@ public class mucalculusParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	public static class SortReferenceContext extends SimpleSortExprContext {
+		public TerminalNode ID() { return getToken(mucalculusParser.ID, 0); }
+		public SortReferenceContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterSortReference(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortReference(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortReference(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class SetSortContext extends SimpleSortExprContext {
 		public SortExprContext sortExpr() {
 			return getRuleContext(SortExprContext.class,0);
@@ -3826,6 +3843,25 @@ public class mucalculusParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class FiniteBagSortContext extends SimpleSortExprContext {
+		public SortExprContext sortExpr() {
+			return getRuleContext(SortExprContext.class,0);
+		}
+		public FiniteBagSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterFiniteBagSort(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFiniteBagSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFiniteBagSort(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class PositiveNumSortContext extends SimpleSortExprContext {
 		public PositiveNumSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
 		@Override
@@ -3855,6 +3891,25 @@ public class mucalculusParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitBooleanSort(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StructuredSortContext extends SimpleSortExprContext {
+		public ConstrDeclListContext constrDeclList() {
+			return getRuleContext(ConstrDeclListContext.class,0);
+		}
+		public StructuredSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterStructuredSort(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStructuredSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStructuredSort(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3896,6 +3951,22 @@ public class mucalculusParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class NaturalNumSortContext extends SimpleSortExprContext {
+		public NaturalNumSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterNaturalNumSort(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNaturalNumSort(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNaturalNumSort(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class IntegerSortContext extends SimpleSortExprContext {
 		public IntegerSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
 		@Override
@@ -3931,77 +4002,6 @@ public class mucalculusParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class SortReferenceContext extends SimpleSortExprContext {
-		public TerminalNode ID() { return getToken(mucalculusParser.ID, 0); }
-		public SortReferenceContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterSortReference(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitSortReference(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitSortReference(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class FiniteBagSortContext extends SimpleSortExprContext {
-		public SortExprContext sortExpr() {
-			return getRuleContext(SortExprContext.class,0);
-		}
-		public FiniteBagSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterFiniteBagSort(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitFiniteBagSort(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitFiniteBagSort(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StructuredSortContext extends SimpleSortExprContext {
-		public ConstrDeclListContext constrDeclList() {
-			return getRuleContext(ConstrDeclListContext.class,0);
-		}
-		public StructuredSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterStructuredSort(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitStructuredSort(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitStructuredSort(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class NaturalNumSortContext extends SimpleSortExprContext {
-		public NaturalNumSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).enterNaturalNumSort(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof mucalculusListener ) ((mucalculusListener)listener).exitNaturalNumSort(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof mucalculusVisitor ) return ((mucalculusVisitor<? extends T>)visitor).visitNaturalNumSort(this);
-			else return visitor.visitChildren(this);
-		}
-	}
 	public static class RealSortContext extends SimpleSortExprContext {
 		public RealSortContext(SimpleSortExprContext ctx) { copyFrom(ctx); }
 		@Override
@@ -4025,11 +4025,11 @@ public class mucalculusParser extends Parser {
 		try {
 			setState(505);
 			switch (_input.LA(1)) {
-			case 9:
+			case 10:
 				_localctx = new BooleanSortContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(468); match(9);
+				setState(468); match(10);
 				}
 				break;
 			case 19:
@@ -4733,7 +4733,7 @@ public class mucalculusParser extends Parser {
 				setState(579); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 6) | (1L << 29) | (1L << 31) | (1L << 34) | (1L << 36) | (1L << 39) | (1L << 42) | (1L << 52) | (1L << 59))) != 0) || ((((_la - 65)) & ~0x3f) == 0 && ((1L << (_la - 65)) & ((1L << (65 - 65)) | (1L << (ID - 65)) | (1L << (INT - 65)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << 6) | (1L << 29) | (1L << 31) | (1L << 34) | (1L << 36) | (1L << 39) | (1L << 42) | (1L << 52) | (1L << 58))) != 0) || ((((_la - 65)) & ~0x3f) == 0 && ((1L << (_la - 65)) & ((1L << (65 - 65)) | (1L << (ID - 65)) | (1L << (INT - 65)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -5254,7 +5254,7 @@ public class mucalculusParser extends Parser {
 		"\2\2L\u026f\3\2\2\2N\u0271\3\2\2\2PQ\5\16\b\2Q\3\3\2\2\2RU\7E\2\2SU\7"+
 		":\2\2TR\3\2\2\2TS\3\2\2\2U\5\3\2\2\2VW\7\34\2\2WX\7&\2\2XY\5\32\16\2Y"+
 		"Z\7\20\2\2Z\7\3\2\2\2[\\\b\5\1\2\\]\7&\2\2]^\5\b\5\2^_\7\20\2\2_c\3\2"+
-		"\2\2`c\5\20\t\2ac\7\f\2\2b[\3\2\2\2b`\3\2\2\2ba\3\2\2\2cp\3\2\2\2de\6"+
+		"\2\2`c\5\20\t\2ac\7\13\2\2b[\3\2\2\2b`\3\2\2\2ba\3\2\2\2cp\3\2\2\2de\6"+
 		"\5\2\3ef\7\62\2\2fo\5\b\5\2gh\6\5\3\3hi\7\64\2\2io\5\b\5\2jk\6\5\4\3k"+
 		"o\7\4\2\2lm\6\5\5\3mo\7\64\2\2nd\3\2\2\2ng\3\2\2\2nj\3\2\2\2nl\3\2\2\2"+
 		"or\3\2\2\2pn\3\2\2\2pq\3\2\2\2q\t\3\2\2\2rp\3\2\2\2sx\5\f\7\2tu\7#\2\2"+
@@ -5262,8 +5262,8 @@ public class mucalculusParser extends Parser {
 		"\2{|\5&\24\2|}\7%\2\2}~\5*\26\2~\r\3\2\2\2\177\u0080\b\b\1\2\u0080\u0081"+
 		"\7\37\2\2\u0081\u00b9\5\16\b\2\u0082\u0083\7\5\2\2\u0083\u0084\5\b\5\2"+
 		"\u0084\u0085\7 \2\2\u0085\u0086\5\16\b\2\u0086\u00b9\3\2\2\2\u0087\u0088"+
-		"\7\6\2\2\u0088\u0089\5\b\5\2\u0089\u008a\7<\2\2\u008a\u008b\5\16\b\2\u008b"+
-		"\u00b9\3\2\2\2\u008c\u008d\7=\2\2\u008d\u008e\5\n\6\2\u008e\u008f\7\62"+
+		"\7\6\2\2\u0088\u0089\5\b\5\2\u0089\u008a\7=\2\2\u008a\u008b\5\16\b\2\u008b"+
+		"\u00b9\3\2\2\2\u008c\u008d\7<\2\2\u008d\u008e\5\n\6\2\u008e\u008f\7\62"+
 		"\2\2\u008f\u0090\5\16\b\2\u0090\u00b9\3\2\2\2\u0091\u0092\7\66\2\2\u0092"+
 		"\u0093\5\n\6\2\u0093\u0094\7\62\2\2\u0094\u0095\5\16\b\2\u0095\u00b9\3"+
 		"\2\2\2\u0096\u0097\7E\2\2\u0097\u0098\5\22\n\2\u0098\u0099\7\62\2\2\u0099"+
@@ -5288,7 +5288,7 @@ public class mucalculusParser extends Parser {
 		"\u00c6\3\2\2\2\u00c6\17\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9\b\t\1"+
 		"\2\u00c9\u00ca\7\37\2\2\u00ca\u00de\5\20\t\2\u00cb\u00cc\7\66\2\2\u00cc"+
 		"\u00cd\5\n\6\2\u00cd\u00ce\7\62\2\2\u00ce\u00cf\5\20\t\2\u00cf\u00de\3"+
-		"\2\2\2\u00d0\u00d1\7=\2\2\u00d1\u00d2\5\n\6\2\u00d2\u00d3\7\62\2\2\u00d3"+
+		"\2\2\2\u00d0\u00d1\7<\2\2\u00d1\u00d2\5\n\6\2\u00d2\u00d3\7\62\2\2\u00d3"+
 		"\u00d4\5\20\t\2\u00d4\u00de\3\2\2\2\u00d5\u00de\5\6\4\2\u00d6\u00d7\7"+
 		"&\2\2\u00d7\u00d8\5\20\t\2\u00d8\u00d9\7\20\2\2\u00d9\u00de\3\2\2\2\u00da"+
 		"\u00de\5\34\17\2\u00db\u00de\7,\2\2\u00dc\u00de\7\b\2\2\u00dd\u00c8\3"+
@@ -5313,7 +5313,7 @@ public class mucalculusParser extends Parser {
 		"\u0145\5\32\16\2\u0110\u0111\7$\2\2\u0111\u0145\5\32\16\2\u0112\u0113"+
 		"\7C\2\2\u0113\u0145\5\32\16\2\u0114\u0115\7\66\2\2\u0115\u0116\5\n\6\2"+
 		"\u0116\u0117\7\62\2\2\u0117\u0118\5\32\16\2\u0118\u0145\3\2\2\2\u0119"+
-		"\u011a\7=\2\2\u011a\u011b\5\n\6\2\u011b\u011c\7\62\2\2\u011c\u011d\5\32"+
+		"\u011a\7<\2\2\u011a\u011b\5\n\6\2\u011b\u011c\7\62\2\2\u011c\u011d\5\32"+
 		"\16\2\u011d\u0145\3\2\2\2\u011e\u011f\7!\2\2\u011f\u0120\5\n\6\2\u0120"+
 		"\u0121\7\62\2\2\u0121\u0122\5\32\16\2\u0122\u0145\3\2\2\2\u0123\u0145"+
 		"\7F\2\2\u0124\u0145\7G\2\2\u0125\u0145\7,\2\2\u0126\u0145\7\b\2\2\u0127"+
@@ -5341,7 +5341,7 @@ public class mucalculusParser extends Parser {
 		"\u015f\6\16\25\3\u015f\u0160\7/\2\2\u0160\u0194\5\32\16\2\u0161\u0162"+
 		"\6\16\26\3\u0162\u0163\7+\2\2\u0163\u0194\5\32\16\2\u0164\u0165\6\16\27"+
 		"\3\u0165\u0166\7\"\2\2\u0166\u0194\5\32\16\2\u0167\u0168\6\16\30\3\u0168"+
-		"\u0169\7<\2\2\u0169\u0194\5\32\16\2\u016a\u016b\6\16\31\3\u016b\u016c"+
+		"\u0169\7=\2\2\u0169\u0194\5\32\16\2\u016a\u016b\6\16\31\3\u016b\u016c"+
 		"\7B\2\2\u016c\u0194\5\32\16\2\u016d\u016e\6\16\32\3\u016e\u016f\7\n\2"+
 		"\2\u016f\u0194\5\32\16\2\u0170\u0171\6\16\33\3\u0171\u0172\7\6\2\2\u0172"+
 		"\u0194\5\32\16\2\u0173\u0174\6\16\34\3\u0174\u0175\7\t\2\2\u0175\u0194"+
@@ -5380,19 +5380,19 @@ public class mucalculusParser extends Parser {
 		"+\3\2\2\2\u01cb\u01cc\7F\2\2\u01cc\u01cd\7\27\2\2\u01cd\u01ce\5\32\16"+
 		"\2\u01ce-\3\2\2\2\u01cf\u01d4\7F\2\2\u01d0\u01d1\7&\2\2\u01d1\u01d2\5"+
 		"\30\r\2\u01d2\u01d3\7\20\2\2\u01d3\u01d5\3\2\2\2\u01d4\u01d0\3\2\2\2\u01d4"+
-		"\u01d5\3\2\2\2\u01d5/\3\2\2\2\u01d6\u01fc\7\13\2\2\u01d7\u01fc\7\25\2"+
-		"\2\u01d8\u01fc\7\21\2\2\u01d9\u01fc\7\32\2\2\u01da\u01fc\7>\2\2\u01db"+
-		"\u01dc\7\7\2\2\u01dc\u01dd\7&\2\2\u01dd\u01de\5*\26\2\u01de\u01df\7\20"+
-		"\2\2\u01df\u01fc\3\2\2\2\u01e0\u01e1\7\60\2\2\u01e1\u01e2\7&\2\2\u01e2"+
-		"\u01e3\5*\26\2\u01e3\u01e4\7\20\2\2\u01e4\u01fc\3\2\2\2\u01e5\u01e6\7"+
-		"\23\2\2\u01e6\u01e7\7&\2\2\u01e7\u01e8\5*\26\2\u01e8\u01e9\7\20\2\2\u01e9"+
-		"\u01fc\3\2\2\2\u01ea\u01eb\7\31\2\2\u01eb\u01ec\7&\2\2\u01ec\u01ed\5*"+
-		"\26\2\u01ed\u01ee\7\20\2\2\u01ee\u01fc\3\2\2\2\u01ef\u01f0\7?\2\2\u01f0"+
-		"\u01f1\7&\2\2\u01f1\u01f2\5*\26\2\u01f2\u01f3\7\20\2\2\u01f3\u01fc\3\2"+
-		"\2\2\u01f4\u01fc\7F\2\2\u01f5\u01f6\7&\2\2\u01f6\u01f7\5*\26\2\u01f7\u01f8"+
-		"\7\20\2\2\u01f8\u01fc\3\2\2\2\u01f9\u01fa\7.\2\2\u01fa\u01fc\5\64\33\2"+
-		"\u01fb\u01d6\3\2\2\2\u01fb\u01d7\3\2\2\2\u01fb\u01d8\3\2\2\2\u01fb\u01d9"+
-		"\3\2\2\2\u01fb\u01da\3\2\2\2\u01fb\u01db\3\2\2\2\u01fb\u01e0\3\2\2\2\u01fb"+
+		"\u01d5\3\2\2\2\u01d5/\3\2\2\2\u01d6\u01fc\7\f\2\2\u01d7\u01fc\7\25\2\2"+
+		"\u01d8\u01fc\7\21\2\2\u01d9\u01fc\7\32\2\2\u01da\u01fc\7>\2\2\u01db\u01dc"+
+		"\7\7\2\2\u01dc\u01dd\7&\2\2\u01dd\u01de\5*\26\2\u01de\u01df\7\20\2\2\u01df"+
+		"\u01fc\3\2\2\2\u01e0\u01e1\7\60\2\2\u01e1\u01e2\7&\2\2\u01e2\u01e3\5*"+
+		"\26\2\u01e3\u01e4\7\20\2\2\u01e4\u01fc\3\2\2\2\u01e5\u01e6\7\23\2\2\u01e6"+
+		"\u01e7\7&\2\2\u01e7\u01e8\5*\26\2\u01e8\u01e9\7\20\2\2\u01e9\u01fc\3\2"+
+		"\2\2\u01ea\u01eb\7\31\2\2\u01eb\u01ec\7&\2\2\u01ec\u01ed\5*\26\2\u01ed"+
+		"\u01ee\7\20\2\2\u01ee\u01fc\3\2\2\2\u01ef\u01f0\7?\2\2\u01f0\u01f1\7&"+
+		"\2\2\u01f1\u01f2\5*\26\2\u01f2\u01f3\7\20\2\2\u01f3\u01fc\3\2\2\2\u01f4"+
+		"\u01fc\7F\2\2\u01f5\u01f6\7&\2\2\u01f6\u01f7\5*\26\2\u01f7\u01f8\7\20"+
+		"\2\2\u01f8\u01fc\3\2\2\2\u01f9\u01fa\7.\2\2\u01fa\u01fc\5\64\33\2\u01fb"+
+		"\u01d6\3\2\2\2\u01fb\u01d7\3\2\2\2\u01fb\u01d8\3\2\2\2\u01fb\u01d9\3\2"+
+		"\2\2\u01fb\u01da\3\2\2\2\u01fb\u01db\3\2\2\2\u01fb\u01e0\3\2\2\2\u01fb"+
 		"\u01e5\3\2\2\2\u01fb\u01ea\3\2\2\2\u01fb\u01ef\3\2\2\2\u01fb\u01f4\3\2"+
 		"\2\2\u01fb\u01f5\3\2\2\2\u01fb\u01f9\3\2\2\2\u01fc\61\3\2\2\2\u01fd\u0202"+
 		"\5\60\31\2\u01fe\u01ff\7C\2\2\u01ff\u0201\5\60\31\2\u0200\u01fe\3\2\2"+

@@ -914,19 +914,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterAction(@NotNull mucalculusParser.ActionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -934,6 +921,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitAction(@NotNull mucalculusParser.ActionContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1044,19 +1044,6 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * <p/>
 	 * The default implementation does nothing.
 	 */
-	@Override public void enterListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
-	@Override public void exitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation does nothing.
-	 */
 	@Override public void enterStateVarAssignment(@NotNull mucalculusParser.StateVarAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1064,6 +1051,19 @@ public class mucalculusBaseListener implements mucalculusListener {
 	 * The default implementation does nothing.
 	 */
 	@Override public void exitStateVarAssignment(@NotNull mucalculusParser.StateVarAssignmentContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void enterListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation does nothing.
+	 */
+	@Override public void exitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

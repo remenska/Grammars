@@ -570,7 +570,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAction(@NotNull mucalculusParser.ActionContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -578,7 +578,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitAction(@NotNull mucalculusParser.ActionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlternativeCompositionRegForm(@NotNull mucalculusParser.AlternativeCompositionRegFormContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -650,7 +650,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStateVarAssignment(@NotNull mucalculusParser.StateVarAssignmentContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -658,7 +658,7 @@ public class mucalculusBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStateVarAssignment(@NotNull mucalculusParser.StateVarAssignmentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitListSizeDataExpr(@NotNull mucalculusParser.ListSizeDataExprContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

@@ -1,1 +1,1 @@
-forall d:Nat,z:Bool.[action1.action2(d)*.action3]false
+forall d:Nat,z:Bool.[!action1(aman,ova).action2(d)*.!noargs]false

@@ -1,8 +1,11 @@
 package info.remenska.PASS.monitor.mCRL2;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -31,27 +34,32 @@ public class Main {
 			System.out.println("\t\tIt should be used this way only for inspecting the translation. Default value is false.");
 			System.exit(1);
 		}
+		String actionSort = new String();
+		String actionFormula = new String();
+		String mappings = new String();
 		// First thing's first
 		// "/home/daniela/Documents/mCRL2_new_models/June2013/ForallExample.mcrl2"
 		InputStream ismcrl2 = new FileInputStream(args[0]);
 		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
 		//full mCRL2 grammar
 		String initialStringmcrl2 = IOUtils.toString(ismcrl2);	
+		String[] splitModel = initialStringmcrl2.split("init ");
+		
 		try{ 
+			
+	
 		mcrl2Lexer lexermcrl2 = new mcrl2Lexer((CharStream) new ANTLRInputStream(initialStringmcrl2));
 		CommonTokenStream tokensmcrl2 = new CommonTokenStream(lexermcrl2);
 		mcrl2Parser parsermcrl2 = new mcrl2Parser(tokensmcrl2);
 		ParseTree treemcrl2 =  parsermcrl2.start();
 		
-//        System.out.println(parser.getState());
+		
 		// we're using this visitor just to collect action && argument types
 		Mymcrl2Visitor visitormcrl2 = new Mymcrl2Visitor(tokensmcrl2);
-		
 		visitormcrl2.visit(treemcrl2);
-		System.out.println("AND FINALLY: " + visitormcrl2.actionsDict);
-		createActionSort(visitormcrl2);
-		createActionFormulaSort();
-		createMappings(visitormcrl2);
+		actionSort = createActionSort(visitormcrl2);
+		actionFormula = createActionFormulaSort();
+		mappings = createMappings(visitormcrl2);
 		}
 		catch(java.lang.NullPointerException e){
 			System.out.println("mCRL2 model is not well formed.");
@@ -59,23 +67,17 @@ public class Main {
 			e.printStackTrace(new PrintStream(System.err));
 			System.exit(1);
 		}
+		// END we're using this visitor just to collect action && argument types
+
 		// end first thing's first
 		// "/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu"
 		InputStream is = new FileInputStream(args[1]);
-		//TODO: First a visitor to collect all the action declarations of a model, for this we need the 
+		//TODO: First a visitor to collect all the action declarations and the init part of a model, for these we need the 
 		//full mCRL2 grammar
 		String initialString = IOUtils.toString(is);
-//		String theString = writer.toString();
 		String finalString = initialString;
-//		finalString = preprocess(initialString);
-//		CharStream cs = new ANTLRStringStream("/home/daniela/IBM/rationalsdp/workspace1/info.remenska.PASS/src/info/remenska/PASS/monitor/mCRL2/test.mu");
-		
-//		mucalculusLexer lexer = new mucalculusLexer(
-//				(finalString.toCharArray());
-//		String[] aman = finalString.split("\\.");
-//		for(String token:aman)
-//				System.out.print(token + ", ");
-//		System.out.println();
+
+		System.out.println("----------------------------------------");
 		System.out.println("Original formula : " + finalString);		
 		try{ 
 		mucalculusLexer lexer = new mucalculusLexer((CharStream) new ANTLRInputStream(finalString));
@@ -109,15 +111,36 @@ public class Main {
           visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, Boolean.parseBoolean(args[2]));
         else
           visitor1 = new MyMuCalculusVisitor(tokens, Mymcrl2Visitor.actionsDict, false);
-
-        visitor1.visit(tree);
         
-		} catch(java.lang.NullPointerException e){
+        visitor1.visit(tree);
+        StringBuffer outputModel = new StringBuffer();
+        outputModel.append(actionSort);
+        outputModel.append(actionFormula);
+        outputModel.append(mappings);
+        outputModel.append(MyMuCalculusVisitor.finalResult.toString());
+        outputModel.append(createInit());
+//        System.out.println(actionSort);
+//        System.out.println(actionFormula);
+//        System.out.println(mappings);
+//        System.out.println(MyMuCalculusVisitor.finalResult.toString());
+//        System.out.println(createInit());
+        BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(args[0]+"_mod.mcrl2"));
+        for(int i=0;i<(splitModel.length-1);i++) // just in case there are commented 'init' in the spec; there should be only one valid anyway
+            os.write(splitModel[i].getBytes());
+        String generated = "\n%====== MONITOR PART GENERATED ==============\n";
+        os.write(generated.getBytes());
+        os.write(outputModel.toString().getBytes());
+        os.flush();
+        System.out.println("The new model has been written at: \n" + args[0] + "_mod.crl2" + "\n");
+		}
+
+		catch(java.lang.NullPointerException e){
 			System.out.println("Mu-calculus formula is not well formed. ");
 			System.err.println("Exception stack trace=========");
 			e.printStackTrace(new PrintStream(System.err));
 			System.exit(1);
 		}
+
 		
 //		System.out.println(MyMuCalculusVisitor.actions);
 //		System.out.println(MyMuCalculusVisitor.varDeclarations);
@@ -168,35 +191,40 @@ public class Main {
 	
 	public static String createActionSort(Mymcrl2Visitor visitor){
 		StringBuffer result = new StringBuffer();
-		result.append("act error, internal_mon;\n");
+		result.append("act error, internal_mon, synch_internal ;\n");
 		result.append("sort Action = struct ");
+		StringBuffer actions = new StringBuffer();
 		Hashtable<String, ArrayList<String>> actionsDict = visitor.actionsDict;
 		Enumeration<String> keys = actionsDict.keys();
 		while(keys.hasMoreElements()){
 			String key = keys.nextElement();
 			ArrayList<String> dataTypes = actionsDict.get(key);
-			result.append(key);
+			result.append(key + "_mon");
+			actions.append("act " + key + "_mon," + key + "_found");
 			if(dataTypes.size()>0){
 				result.append("(");
+				actions.append(":");
 				int counter = 1;
 				Iterator<String> iter = dataTypes.iterator();
 				while(iter.hasNext()){
 					String dt = iter.next();
 					result.append(key+"_"+ "arg"+counter++ + ":" + dt);
-
-					if(iter.hasNext())
+					actions.append(dt);
+					if(iter.hasNext()){
 						result.append(",");
+						actions.append("#");		
+					}
 				}
 				result.append(")");
 			}
-			
 			if(keys.hasMoreElements()){
 				result.append("\n | ");
 			} 
+			actions.append(";\n");
 		}
 		result.append(";\n");
-
-		System.out.println(result.toString());
+		result.append("\n" + actions);
+//		System.out.println(result.toString());
 		return result.toString();
 	}
 	
@@ -206,16 +234,16 @@ public class Main {
 		result.append("var c1,c2:Action;\n");
 		result.append("f,g:ActionFormula;\n");
 		result.append("eqn\n");
-		result.append("satisfy(c1,action(c2)) = (c1 == c2) ;");
-		result.append("satisfy(c1,and(f,g)) = satisfy(c1,f) && satisfy(c1,g);\n");
-		result.append("satisfy(c1,not(f)) = !satisfy(c1,f);\n");
-		result.append("satisfy(c1,or(f,g)) = satisfy(c1,f) || satisfy(c1,g);\n");
-		result.append("satisfy(c1,True) = true;\n");
-		result.append("satisfy(c1,False) = false;\n");
+		result.append("\t satisfy(c1,action(c2)) = (c1 == c2) ;");
+		result.append("\t satisfy(c1,and(f,g)) = satisfy(c1,f) && satisfy(c1,g);\n");
+		result.append("\t satisfy(c1,not(f)) = !satisfy(c1,f);\n");
+		result.append("\t satisfy(c1,or(f,g)) = satisfy(c1,f) || satisfy(c1,g);\n");
+		result.append("\t satisfy(c1,True) = true;\n");
+		result.append("\t satisfy(c1,False) = false;\n");
 
 		result.append("\n");
 		
-		System.out.println(result.toString());
+//		System.out.println(result.toString());
 		return result.toString();
 	}
 	
@@ -228,7 +256,32 @@ public class Main {
 					     "| True \n" +
 					     "| False ; \n\n");	
 		
-		System.out.println(result);
+//		System.out.println(result);
 		return result;
+	}
+	
+	public static String createInit(){
+		StringBuffer result = new StringBuffer();
+		result.append("init hide ({synch_internal}, allow({error, synch_internal,");
+		Enumeration<String> actions = Mymcrl2Visitor.actionsDict.keys();
+		while(actions.hasMoreElements()){
+			result.append(actions.nextElement()+"_found");
+			if(actions.hasMoreElements())
+				result.append(",");
+		}
+		result.append("}, \n comm({");
+		result.append("internal | internal_mon -> synch_internal, \n");
+		actions = Mymcrl2Visitor.actionsDict.keys();
+		while(actions.hasMoreElements()){
+			String action = actions.nextElement();
+			result.append("\t " + action + " | " + action+"_mon -> " + action+"_found");
+			if(actions.hasMoreElements())
+				result.append(",\n");
+		}
+		result.append("\n},\n Monitor " );
+		
+		result.append(" || " + Mymcrl2Visitor.afterInit);
+		result.append(")));");
+		return result.toString();
 	}
 }
